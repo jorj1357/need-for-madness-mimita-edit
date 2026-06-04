@@ -19,8 +19,8 @@ public class Mad {
    int mxz = 0;
    int cxz = 0;
    CarDefine cd;
-   boolean[] dominate = new boolean[Madness.maxPlayers()];
-   boolean[] caught = new boolean[Madness.maxPlayers()];
+   boolean[] dominate = new boolean[Madness.playerSlots()];
+   boolean[] caught = new boolean[Madness.playerSlots()];
    int pzy = 0;
    int pxy = 0;
    float speed = 0.0F;
@@ -128,7 +128,7 @@ public class Mad {
    public void reseto(int var1, ContO var2, CheckPoints var3) {
       this.cn = var1;
 
-      for (int var4 = 0; var4 < Madness.maxPlayers(); var4++) {
+      for (int var4 = 0; var4 < Madness.playerSlots(); var4++) {
          this.dominate[var4] = false;
          this.caught[var4] = false;
       }
@@ -2832,3 +2832,4 @@ public class Mad {
       return (var1 - var2) * (var1 - var2) + (var3 - var4) * (var3 - var4);
    }
 }
+

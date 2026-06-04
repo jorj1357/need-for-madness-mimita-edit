@@ -40,7 +40,7 @@ public class Madness extends Panel {
    static int endadv = 0;
    static long advtime = 0L;
    static int autotestMode = 0;
-   public static final int MAX_PLAYERS = 30;
+   public static final int MAX_PLAYERS = 20;
    public static final int SAFE_MAX_PLAYERS = 30;
    static boolean loggedMaxPlayers = false;
 
@@ -59,6 +59,10 @@ public class Madness extends Panel {
       }
 
       return var0;
+   }
+
+   public static int playerSlots() {
+      return Math.max(8, maxPlayers());
    }
 
    public static void logMaxPlayers(String var0) {
@@ -671,3 +675,6 @@ public class Madness extends Panel {
       return var3;
    }
 }
+
+
+

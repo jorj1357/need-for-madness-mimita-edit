@@ -1,0 +1,160 @@
+Manifest-Version: 1.0
+Created-By: Radicalplay.com Games Ltd.
+Main-Class: Madness
+
+Name: Wheels.class
+SHA1-Digest: C0ut6y6OWnGaWW5hp0M2UqmQlwQ=
+
+Name: ibxm/Data.class
+SHA1-Digest: X2hi+4IwWrSPuOk6eZJ/FTCiDsU=
+
+Name: ibxm/Channel.class
+SHA1-Digest: zCcX/Hajn5w+0/08b1cyTeZwFqE=
+
+Name: Plane.class
+SHA1-Digest: kTiKkU1BvHdc765DRxSwfKDZZbw=
+
+Name: ds/nfm/ModuleSlayer.class
+SHA1-Digest: l1OzhBqGnuMC5kqO1h4sRNhfqpE=
+
+Name: ds/nfm/Module.class
+SHA1-Digest: OdQvDUhVCo0WbsUX6YbCTtRpOys=
+
+Name: ibxm/GlobalVol.class
+SHA1-Digest: JgtOqgMtBBU3cCzyku6T6QpeXDQ=
+
+Name: xtGraphics.class
+SHA1-Digest: zeU6XpcbYpoAlw37KC4Pt53nUgA=
+
+Name: ContO.class
+SHA1-Digest: CtD3fv6g5PVmQWySt/m72NXizZk=
+
+Name: Medium.class
+SHA1-Digest: b0Z0mLUuvxAae9TQ3E+SflWzZis=
+
+Name: Record.class
+SHA1-Digest: MCNQmf1jwC4CyAiaA1/TB92baWk=
+
+Name: RadicalMod.class
+SHA1-Digest: jAtAzlzBqFs53WaKGoahRAd6D/k=
+
+Name: Login.class
+SHA1-Digest: mjVObXGS5C85uXHeAiSChPXJsW8=
+
+Name: ds/nfm/xm/IBXMod.class
+SHA1-Digest: OdYrp1CihErSRQPtlN2ohmtmL2o=
+
+Name: CheckPoints.class
+SHA1-Digest: H9PR0Ce1mFsYZFrwLklTSBTcbaA=
+
+Name: Mad.class
+SHA1-Digest: vwHfmzmka6HbqKtyltr1hXHSt2w=
+
+Name: ds/nfm/mod/ModTrackInfo.class
+SHA1-Digest: wPZGoQDfUTq6FBZFuddn8yzko5Q=
+
+Name: SuperClip.class
+SHA1-Digest: CvhWHD676zsFdzLPwQ+UrCEPIq0=
+
+Name: soundClip.class
+SHA1-Digest: 7Eo1L9H0FM3e1jqoxbleqDKrhkM=
+
+Name: UlawUtils.class
+SHA1-Digest: Rw2hYmXR7BNKCyZjNo580XgBeLk=
+
+Name: CarMaker.class
+SHA1-Digest: C9V66OSyLy6dZNhd+gKcUmchX4Q=
+
+Name: Globe.class
+SHA1-Digest: LbaMaRPXpr27+wj5sIAvuSgyX+o=
+
+Name: Lobby.class
+SHA1-Digest: sld0rHF0qGLAjnie7tjM/dH+PSU=
+
+Name: ibxm/Pattern.class
+SHA1-Digest: 4+mr8OdmsVlEl9JozDAwBU+kSlk=
+
+Name: ds/nfm/mod/Mod.class
+SHA1-Digest: aPER0EPUM6Ei7UWZypv+HEbewwE=
+
+Name: ds/nfm/mod/ModInstrument.class
+SHA1-Digest: YkLzyDsPOJ4ZDV+V5aTmG5WLcSY=
+
+Name: update.class
+SHA1-Digest: KucNjYvMCGYW0iKpSm0UjdIHhco=
+
+Name: CarDefine.class
+SHA1-Digest: YC6KWdPIGv5ttqE1NAzCVhmASQ0=
+
+Name: GameSparker.class
+SHA1-Digest: l1406Br3w+2YdYC4WEKAz0c0Q2c=
+
+Name: ds/nfm/ModuleException.class
+SHA1-Digest: RuCLLIZ+FfwvLs/cBfbmDuzzCj8=
+
+Name: Control.class
+SHA1-Digest: ccbP2lEFMI9/d8IyxjIxSp0kHxc=
+
+Name: udpServe.class
+SHA1-Digest: eUtkXz62t04OVD1GUNWZGGa+Mbk=
+
+Name: Madness.class
+SHA1-Digest: hdkPItPxB8foE2Ad+9/S4pZsHfk=
+
+Name: udpOnline.class
+SHA1-Digest: IQ/rITfmIk515ARaijMsIRpSxAE=
+
+Name: ibxm/Sample.class
+SHA1-Digest: hWdTdZCSPMZV+Ul19Juu5iSRfOM=
+
+Name: ibxm/Module.class
+SHA1-Digest: TStkDDQoCOxhngV/84ukpTW2mfo=
+
+Name: ibxm/Envelope.class
+SHA1-Digest: SAh7BK/R2ITXMW7eRuLK460qHBY=
+
+Name: GameSparker$1.class
+SHA1-Digest: 7xxgsFvGqWwIajWvkmYFtRARzPo=
+
+Name: Madness$1.class
+SHA1-Digest: HxuuCRYnrrwHP5Qp0DaK8qPO/jU=
+
+Name: Madness$2.class
+SHA1-Digest: +W34y3ScOPQI34u7G4r4XY80Yh0=
+
+Name: ibxm/Note.class
+SHA1-Digest: f7plQq9reXFcz7rarwKIkVfyWak=
+
+Name: Madness$3.class
+SHA1-Digest: Ez2K7qqTI0VlE1oRPl9v3k8hhOU=
+
+Name: ds/nfm/mod/ModSlayer.class
+SHA1-Digest: ugsRX+Y5Pw8Q2nGNplhbOuCkisM=
+
+Name: Trackers.class
+SHA1-Digest: vYbyPy89D6EMwGgh/+LkjIZ+U5Q=
+
+Name: StageMaker.class
+SHA1-Digest: ohxenet9hFwsJre0ScuIvqlk2ZY=
+
+Name: Smenu.class
+SHA1-Digest: CF0BDPD5O0FhDhWe1ea+i9dVeEU=
+
+Name: MouseHandler.class
+SHA1-Digest: K95Ru0ynhkqsZbz8jlll5MbAGNs=
+
+Name: ibxm/Instrument.class
+SHA1-Digest: morIG7wjkle/uiKBRuHFUqd+Ylk=
+
+Name: UDPMistro.class
+SHA1-Digest: CWwZ5XsOw/3nKbTG0CvmNY/WApY=
+
+Name: ibxm/IBXM.class
+SHA1-Digest: PVeuAi5Pg0ucyH7RuGm6/qWsF1U=
+
+Name: ds/nfm/xm/IBXModSlayer.class
+SHA1-Digest: /I0i+ES3TW7MW3ghZDmwWb1AqtY=
+
+Name: ds/nfm/ModuleLoader.class
+SHA1-Digest: 4GVBIxzGqWHKv2GsDe765ww+tOU=
+

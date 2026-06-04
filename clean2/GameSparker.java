@@ -54,7 +54,7 @@ public class GameSparker extends Applet implements Runnable {
    Image[] carmaker = new Image[2];
    Image[] stagemaker = new Image[2];
    int showsize = 0;
-   Control[] u = new Control[Madness.maxPlayers()];
+   Control[] u = new Control[Madness.playerSlots()];
    int mouses = 0;
    int xm = 0;
    int ym = 0;
@@ -145,9 +145,9 @@ public class GameSparker extends Applet implements Runnable {
       Record var12 = new Record(var1);
       this.loadbase(var4, var1, var2, var6, false);
       ContO[] var13 = new ContO[610];
-      Mad[] var14 = new Mad[Madness.maxPlayers()];
+      Mad[] var14 = new Mad[Madness.playerSlots()];
 
-      for (int var15 = 0; var15 < Madness.maxPlayers(); var15++) {
+      for (int var15 = 0; var15 < Madness.playerSlots(); var15++) {
          var14[var15] = new Mad(var5, var1, var12, var6, var15);
          this.u[var15] = new Control(var1);
       }
@@ -1816,7 +1816,7 @@ public class GameSparker extends Applet implements Runnable {
          }
 
          this.repaint();
-         if (var6.im > -1 && var6.im < Madness.maxPlayers()) {
+         if (var6.im > -1 && var6.im < Madness.playerSlots()) {
             int var54 = 0;
             if (var6.multion == 2 || var6.multion == 3) {
                var54 = var6.im;
@@ -3029,6 +3029,26 @@ public class GameSparker extends Applet implements Runnable {
             var3.nochekflk = false;
          }
 
+         for (int var28 = 0; var28 < var6.nplayers; var28++) {
+            if (var6.sc[var28] < 0 || var6.sc[var28] >= var2.length || var2[var6.sc[var28]] == null) {
+               int var31 = var28 % 16;
+               if (var31 < 0 || var31 >= var2.length || var2[var31] == null) {
+                  var31 = 0;
+               }
+
+               System.out.println("[MAX_PLAYERS] slot " + var28 + " had invalid car id " + var6.sc[var28] + "; using " + var31);
+               var6.sc[var28] = var31;
+            }
+
+            if (var6.plnames[var28] == null || var6.plnames[var28].length() == 0) {
+               var6.plnames[var28] = var28 == var6.im ? "Player" : "MadBot " + var28;
+            }
+
+            if (var6.pclan[var28] == null) {
+               var6.pclan[var28] = "";
+            }
+         }
+
          for (int var29 = 0; var29 < var6.nplayers; var29++) {
             this.u[var29].reset(var5, var6.sc[var29]);
          }
@@ -3037,12 +3057,23 @@ public class GameSparker extends Applet implements Runnable {
          var5.calprox();
 
          for (int var30 = 0; var30 < var6.nplayers; var30++) {
-            if (var6.fase == 22) {
-               var6.colorCar(var2[var6.sc[var30]], var30);
+            int safeCarIdForMaxPlayers = var6.sc[var30];
+            if (safeCarIdForMaxPlayers < 0 || safeCarIdForMaxPlayers >= var2.length || var2[safeCarIdForMaxPlayers] == null) {
+               safeCarIdForMaxPlayers = var30 % 16;
+               if (safeCarIdForMaxPlayers < 0 || safeCarIdForMaxPlayers >= var2.length || var2[safeCarIdForMaxPlayers] == null) {
+                  safeCarIdForMaxPlayers = 0;
+               }
+
+               System.out.println("[MAX_PLAYERS] slot " + var30 + " corrected before spawn to car id " + safeCarIdForMaxPlayers);
+               var6.sc[var30] = safeCarIdForMaxPlayers;
             }
 
-            var1[var30] = new ContO(var2[var6.sc[var30]], var6.xstart[var30], 250 - var2[var6.sc[var30]].grat, var6.zstart[var30], 0);
-            var7[var30].reseto(var6.sc[var30], var1[var30], var5);
+            if (var6.fase == 22) {
+               var6.colorCar(var2[safeCarIdForMaxPlayers], var30);
+            }
+
+            var1[var30] = new ContO(var2[safeCarIdForMaxPlayers], var6.xstart[var30], 250 - var2[safeCarIdForMaxPlayers].grat, var6.zstart[var30], 0);
+            var7[var30].reseto(safeCarIdForMaxPlayers, var1[var30], var5);
          }
 
          if (var6.fase == 2 || var6.fase == -22) {

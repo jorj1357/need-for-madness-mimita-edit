@@ -24,22 +24,22 @@ public class CheckPoints {
    int top20 = 0;
    int nto = 0;
    int[] pos = this.defaultPositions();
-   int[] clear = new int[Madness.maxPlayers()];
-   int[] dested = new int[Madness.maxPlayers()];
-   float[] magperc = new float[Madness.maxPlayers()];
+   int[] clear = new int[Madness.playerSlots()];
+   int[] dested = new int[Madness.playerSlots()];
+   float[] magperc = new float[Madness.playerSlots()];
    int wasted = 0;
    boolean haltall = false;
    int pcleared = 0;
-   int[] opx = new int[Madness.maxPlayers()];
-   int[] opz = new int[Madness.maxPlayers()];
-   int[] onscreen = new int[Madness.maxPlayers()];
-   int[] omxz = new int[Madness.maxPlayers()];
+   int[] opx = new int[Madness.playerSlots()];
+   int[] opz = new int[Madness.playerSlots()];
+   int[] onscreen = new int[Madness.playerSlots()];
+   int[] omxz = new int[Madness.playerSlots()];
    int catchfin = 0;
    int postwo = 0;
    float prox = 0.0F;
 
    private int[] defaultPositions() {
-      int[] var1 = new int[Madness.maxPlayers()];
+      int[] var1 = new int[Madness.playerSlots()];
 
       for (int var2 = 0; var2 < var1.length; var2++) {
          var1[var2] = var1.length;
@@ -169,3 +169,4 @@ public class CheckPoints {
       return (var1 - var2) * (var1 - var2) + (var3 - var4) * (var3 - var4);
    }
 }
+

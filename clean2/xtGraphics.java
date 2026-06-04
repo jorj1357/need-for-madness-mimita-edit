@@ -81,11 +81,11 @@ public class xtGraphics extends Panel implements Runnable {
    int osc = 10;
    int minsl = 0;
    int maxsl = 15;
-   int[] sc = new int[Madness.maxPlayers()];
-   int[] xstart = new int[Madness.maxPlayers()];
-   int[] zstart = new int[Madness.maxPlayers()];
-   float[][] allrnp = new float[Madness.maxPlayers()][6];
-   boolean[] isbot = new boolean[Madness.maxPlayers()];
+   int[] sc = new int[Madness.playerSlots()];
+   int[] xstart = new int[Madness.playerSlots()];
+   int[] zstart = new int[Madness.playerSlots()];
+   float[][] allrnp = new float[Madness.playerSlots()][6];
+   boolean[] isbot = new boolean[Madness.playerSlots()];
    int clangame = 0;
    boolean clanchat = false;
    String[] pclan = this.newPlayerStrings();
@@ -93,7 +93,7 @@ public class xtGraphics extends Panel implements Runnable {
    int lcarx = 0;
    int lcary = 0;
    int lcarz = 0;
-   int[] dcrashes = new int[Madness.maxPlayers()];
+   int[] dcrashes = new int[Madness.playerSlots()];
    int beststunt = 0;
    int laptime = 0;
    int fastestlap = 0;
@@ -253,8 +253,8 @@ public class xtGraphics extends Panel implements Runnable {
    int pnext = 0;
    int pback = 0;
    int pstar = 0;
-   Image[] orank = new Image[Madness.maxPlayers()];
-   Image[] rank = new Image[Madness.maxPlayers()];
+   Image[] orank = new Image[Madness.playerSlots()];
+   Image[] rank = new Image[Madness.playerSlots()];
    Image[] ocntdn = new Image[4];
    Image[] cntdn = new Image[4];
    int gocnt = 0;
@@ -302,7 +302,7 @@ public class xtGraphics extends Panel implements Runnable {
    int posit = 0;
    int wasted = 0;
    int laps = 0;
-   int[] dested = new int[Madness.maxPlayers()];
+   int[] dested = new int[Madness.playerSlots()];
    int dmcnt = 0;
    boolean dmflk = false;
    int pwcnt = 0;
@@ -404,7 +404,7 @@ public class xtGraphics extends Panel implements Runnable {
    int flang = 0;
 
    private String[] newPlayerStrings() {
-      String[] var1 = new String[Madness.maxPlayers()];
+      String[] var1 = new String[Madness.playerSlots()];
 
       for (int var2 = 0; var2 < var1.length; var2++) {
          var1[var2] = "";
@@ -1585,7 +1585,7 @@ public class xtGraphics extends Panel implements Runnable {
       this.winner = false;
       this.wasted = 0;
 
-      for (int var2 = 0; var2 < Madness.maxPlayers(); var2++) {
+      for (int var2 = 0; var2 < Madness.playerSlots(); var2++) {
          this.dested[var2] = 0;
          this.isbot[var2] = false;
          this.dcrashes[var2] = 0;
@@ -10087,7 +10087,7 @@ public class xtGraphics extends Panel implements Runnable {
       this.pos = this.loadsnap(this.opos);
       this.sped = this.loadsnap(this.osped);
 
-      for (int var2 = 0; var2 < Madness.maxPlayers(); var2++) {
+      for (int var2 = 0; var2 < Madness.playerSlots(); var2++) {
          if (var2 < 8 && this.orank[var2] != null) {
             this.rank[var2] = this.loadsnap(this.orank[var2]);
          } else {

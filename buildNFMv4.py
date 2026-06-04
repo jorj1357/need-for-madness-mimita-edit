@@ -39,19 +39,27 @@ if os.path.exists(BUILD_DIR):
                 print(f"Failed deleting {file}: {e}")
 
 # =========================
-# FIND JAVA FILES
+# FIND JAVA FILES RECURSIVELY
 # =========================
 
 java_files = []
 
-for file in os.listdir("clean2"):
-    if file.endswith(".java"):
-        java_files.append(os.path.join("clean2", file))
+for root, dirs, files in os.walk("clean2"):
+
+    for file in files:
+
+        if file.endswith(".java"):
+
+            java_files.append(
+                os.path.join(root, file)
+            )
 
 if not java_files:
     print("No Java files found!")
     input("Press Enter to exit...")
     raise SystemExit
+
+print(f"Found {len(java_files)} Java files.")
 
 # =========================
 # COMPILE JAVA
