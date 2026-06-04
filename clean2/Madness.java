@@ -40,8 +40,10 @@ public class Madness extends Panel {
    static int endadv = 0;
    static long advtime = 0L;
    static int autotestMode = 0;
-   public static final int MAX_PLAYERS = 30;
-   public static final int SAFE_MAX_PLAYERS = 30;
+   // public static final int MAX_PLAYERS = 30;
+   public static final int MAX_PLAYERS = 99;
+   // public static final int SAFE_MAX_PLAYERS = 30;
+   public static final int SAFE_MAX_PLAYERS = 999;
    static boolean loggedMaxPlayers = false;
 
    public static int maxPlayers() {
