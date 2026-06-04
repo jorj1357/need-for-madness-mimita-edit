@@ -40,9 +40,37 @@ public class Madness extends Panel {
    static int endadv = 0;
    static long advtime = 0L;
    static int autotestMode = 0;
+   public static final int MAX_PLAYERS = 30;
+   public static final int SAFE_MAX_PLAYERS = 30;
+   static boolean loggedMaxPlayers = false;
+
+   public static int maxPlayers() {
+      int var0 = MAX_PLAYERS;
+      if (var0 < 1) {
+         System.out.println("[MAX_PLAYERS] WARNING configured value " + MAX_PLAYERS + " is below 1; clamping to 1");
+         var0 = 1;
+      }
+
+      if (var0 > SAFE_MAX_PLAYERS) {
+         System.out.println(
+            "[MAX_PLAYERS] WARNING configured value " + MAX_PLAYERS + " exceeds safe limit " + SAFE_MAX_PLAYERS + "; clamping to " + SAFE_MAX_PLAYERS
+         );
+         var0 = SAFE_MAX_PLAYERS;
+      }
+
+      return var0;
+   }
+
+   public static void logMaxPlayers(String var0) {
+      if (!loggedMaxPlayers) {
+         System.out.println("[MAX_PLAYERS] startup context=" + var0 + ", configured=" + MAX_PLAYERS + ", effective=" + maxPlayers());
+         loggedMaxPlayers = true;
+      }
+   }
 
    public static void main(String[] var0) {
       // System.runFinalizersOnExit(true);
+      logMaxPlayers("main");
       frame = new Frame("Need for Madness");
       frame.setBackground(new Color(0, 0, 0));
       frame.setIgnoreRepaint(true);

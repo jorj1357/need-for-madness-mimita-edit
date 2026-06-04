@@ -560,11 +560,11 @@ public class CarDefine implements Runnable {
       1.1F,
       1.38F,
       // lead oxide
-      // 1.43F,
+      1.43F,
       // idk waht it does but  its cool 6 3 2026
       // 1.7F,
       // this is momentummmmmm 6 3 2026 momentum big 
-      9.9F,
+      // 9.9F,
       1.48F,
       1.35F,
       1.7F,
@@ -625,9 +625,10 @@ public class CarDefine implements Runnable {
       1.0F,
 
       // Lead Oxide
-      // 10.0F,
+      10.0F,
       // chill bro idk  what makes it so i touch  the car adn i die instant but idkrinag 6 3 2026
-      2.0F,
+      // 2.0F,
+      // 1.0F,
 
       1.0F,
       1.0F,
@@ -1168,7 +1169,12 @@ public class CarDefine implements Runnable {
       0.8F,
       0.42F,
       0.7F,
-      0.72F,
+      // lead oxide
+      // set to 0 for god mode heheheheheh 6 3 2026
+      // 0.72F,
+      // ok 0 is boring just put super small
+      // 0.0F,
+      0.01F,
       0.6F,
       0.58F,
       0.41F,
@@ -1344,8 +1350,8 @@ public class CarDefine implements Runnable {
       0.76F,
       // lead oxide bc 7
       // 6 3 2026 these values actually firckin work which is aswesome
-      // 0.82F,
-      8.2F,
+      0.82F,
+      // 8.2F,
       0.76F,
       0.72F,
       0.62F,
