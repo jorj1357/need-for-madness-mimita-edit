@@ -1471,12 +1471,21 @@ public class xtGraphics extends Panel implements Runnable {
       }
 
       for (int var3 = 0; var3 < 6; var3++) {
-         this.air[var3].stop();
+         if (this.air[var3] != null) {
+            this.air[var3].stop();
+         }
+
          this.air[var3] = null;
       }
 
-      this.wastd.stop();
-      this.intertrack.unload();
+      if (this.wastd != null) {
+         this.wastd.stop();
+      }
+
+      if (this.intertrack != null) {
+         this.intertrack.unload();
+      }
+
       this.intertrack = null;
    }
 
@@ -11259,4 +11268,3 @@ public class xtGraphics extends Panel implements Runnable {
       return var3;
    }
 }
-

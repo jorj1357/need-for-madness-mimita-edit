@@ -1,6 +1,16 @@
 import java.awt.Color;
 
 public class Mad {
+   static final boolean SUPER_AIR_CONTROL_ENABLED = true;
+   // static final float SUPER_AIR_CONTROL_MULTIPLIER = 3.0F;
+   // static final float SUPER_AIR_CONTROL_MULTIPLIER = 1.1F;
+   // static final float SUPER_AIR_CONTROL_MULTIPLIER = 1.5F;
+   static final float SUPER_AIR_CONTROL_MULTIPLIER = 1.22F;
+   // static final float SUPER_AIR_BUILDUP_MULTIPLIER = 3.0F;
+   // static final float SUPER_AIR_BUILDUP_MULTIPLIER = 1.1F;
+   // static final float SUPER_AIR_BUILDUP_MULTIPLIER = 1.5F;
+   static final float SUPER_AIR_BUILDUP_MULTIPLIER = 1.22F;
+   static final boolean RESET_SUPER_AIR_CONTROL_ON_LAND = true;
    Medium m;
    Record rpd;
    xtGraphics xt;
@@ -35,6 +45,7 @@ public class Mad {
    boolean pr = false;
    boolean pd = false;
    boolean pu = false;
+   boolean superAir = false;
    int loop = 0;
    float ucomp = 0.0F;
    float dcomp = 0.0F;
@@ -78,6 +89,11 @@ public class Mad {
    int shakedam = 0;
    int outshakedam = 0;
    boolean colidim = false;
+   int lastLoggedLoop = Integer.MIN_VALUE;
+   boolean lastLoggedMtouch = false;
+   boolean lastLoggedWtouch = false;
+   boolean lastLoggedSuperAir = false;
+   boolean loggedSuperAirMultipliers = false;
 
    public Mad(CarDefine var1, Medium var2, Record var3, xtGraphics var4, int var5) {
       this.cd = var1;
@@ -85,6 +101,28 @@ public class Mad {
       this.rpd = var3;
       this.xt = var4;
       this.im = var5;
+   }
+
+   private void logAirState(String var1) {
+      if (this.loop != this.lastLoggedLoop) {
+         System.out.println("[SUPER_AIR] loop " + this.lastLoggedLoop + " -> " + this.loop + " at " + var1 + ", cn=" + this.cn + ", im=" + this.im);
+         this.lastLoggedLoop = this.loop;
+      }
+
+      if (this.mtouch != this.lastLoggedMtouch) {
+         System.out.println("[SUPER_AIR] mtouch " + this.lastLoggedMtouch + " -> " + this.mtouch + " at " + var1 + ", cn=" + this.cn + ", im=" + this.im);
+         this.lastLoggedMtouch = this.mtouch;
+      }
+
+      if (this.wtouch != this.lastLoggedWtouch) {
+         System.out.println("[SUPER_AIR] wtouch " + this.lastLoggedWtouch + " -> " + this.wtouch + " at " + var1 + ", cn=" + this.cn + ", im=" + this.im);
+         this.lastLoggedWtouch = this.wtouch;
+      }
+
+      if (this.superAir != this.lastLoggedSuperAir) {
+         System.out.println("[SUPER_AIR] superAir " + this.lastLoggedSuperAir + " -> " + this.superAir + " at " + var1 + ", cn=" + this.cn + ", im=" + this.im);
+         this.lastLoggedSuperAir = this.superAir;
+      }
    }
 
    public void reseto(int var1, ContO var2, CheckPoints var3) {
@@ -129,6 +167,7 @@ public class Mad {
       this.pr = false;
       this.pd = false;
       this.pu = false;
+      this.superAir = false;
       this.loop = 0;
       this.ucomp = 0.0F;
       this.dcomp = 0.0F;
@@ -193,6 +232,12 @@ public class Mad {
       if (var3.nfix == 4) {
          this.fixes = 1;
       }
+
+      this.lastLoggedLoop = Integer.MIN_VALUE;
+      this.lastLoggedMtouch = false;
+      this.lastLoggedWtouch = false;
+      this.lastLoggedSuperAir = false;
+      this.loggedSuperAirMultipliers = false;
    }
 
    public void drive(Control var1, ContO var2, Trackers var3, CheckPoints var4) {
@@ -249,7 +294,18 @@ public class Mad {
       float var14 = 0.0F;
       float var15 = 0.0F;
       float var16 = 0.0F;
+      this.logAirState("drive-start");
       if (this.mtouch) {
+         if (RESET_SUPER_AIR_CONTROL_ON_LAND && this.superAir) {
+            this.superAir = false;
+            this.loggedSuperAirMultipliers = false;
+            this.pl = false;
+            this.pr = false;
+            this.pu = false;
+            this.pd = false;
+            System.out.println("[SUPER_AIR] disabled on landing cn=" + this.cn + ", im=" + this.im);
+         }
+
          this.loop = 0;
       }
 
@@ -273,17 +329,27 @@ public class Mad {
             }
          }
 
-         this.ucomp = 0.0F;
-         this.dcomp = 0.0F;
-         this.lcomp = 0.0F;
-         this.rcomp = 0.0F;
+         if (!this.superAir) {
+            this.ucomp = 0.0F;
+            this.dcomp = 0.0F;
+            this.lcomp = 0.0F;
+            this.rcomp = 0.0F;
+         }
       }
 
       if (var1.handb) {
          if (!this.pushed) {
             if (!this.wtouch) {
-               if (this.loop == 0) {
+               if (SUPER_AIR_CONTROL_ENABLED && !this.superAir) {
+                  this.superAir = true;
+                  this.loggedSuperAirMultipliers = false;
+                  System.out.println("[SUPER_AIR] SPACE enabled cn=" + this.cn + ", im=" + this.im + ", loop=" + this.loop + ", y=" + var2.y);
+               }
+
+               if (this.loop == 0 || this.loop == -1 || this.superAir) {
+                  System.out.println("[SUPER_AIR] SPACE activation loop=" + this.loop + " -> 1, superAir=" + this.superAir);
                   this.loop = 1;
+                  this.pushed = true;
                }
             } else if (this.gtouch) {
                this.pushed = true;
@@ -303,93 +369,101 @@ public class Mad {
          this.loop = 2;
       }
 
+      float effRotMult = SUPER_AIR_CONTROL_ENABLED && this.superAir ? SUPER_AIR_CONTROL_MULTIPLIER : 1.0F;
+      float effBuildMult = SUPER_AIR_CONTROL_ENABLED && this.superAir ? SUPER_AIR_BUILDUP_MULTIPLIER : 1.0F;
+      if (SUPER_AIR_CONTROL_ENABLED && this.superAir && !this.loggedSuperAirMultipliers) {
+         System.out.println("[SUPER_AIR] effective multipliers rot=" + effRotMult + ", build=" + effBuildMult + ", airs=" + this.cd.airs[this.cn] + ", airc=" + this.cd.airc[this.cn]);
+         this.loggedSuperAirMultipliers = true;
+      }
+
+      this.logAirState("post-space");
       if (!this.dest) {
          if (this.loop == 2) {
             if (var1.up) {
                if (this.ucomp == 0.0F) {
-                  this.ucomp = 10.0F + (this.scy[0] + 50.0F) / 20.0F;
+                  this.ucomp = (10.0F + (this.scy[0] + 50.0F) / 20.0F) * effBuildMult;
                   if (this.ucomp < 5.0F) {
                      this.ucomp = 5.0F;
                   }
 
-                  if (this.ucomp > 10.0F) {
-                     this.ucomp = 10.0F;
+                  if (this.ucomp > 10.0F * effBuildMult) {
+                     this.ucomp = 10.0F * effBuildMult;
                   }
 
-                  this.ucomp = this.ucomp * this.cd.airs[this.cn];
+                  this.ucomp = this.ucomp * this.cd.airs[this.cn] * effBuildMult;
                }
 
-               if (this.ucomp < 20.0F) {
-                  this.ucomp = (float)(this.ucomp + 0.5 * this.cd.airs[this.cn]);
+               if (this.ucomp < 20.0F * effBuildMult) {
+                  this.ucomp = (float)(this.ucomp + 0.5 * this.cd.airs[this.cn] * effBuildMult);
                }
 
-               var14 = -this.cd.airc[this.cn] * this.m.sin(var2.xz) * var6;
-               var15 = this.cd.airc[this.cn] * this.m.cos(var2.xz) * var6;
+               var14 = -this.cd.airc[this.cn] * effRotMult * this.m.sin(var2.xz) * var6;
+               var15 = this.cd.airc[this.cn] * effRotMult * this.m.cos(var2.xz) * var6;
             } else if (this.ucomp != 0.0F && this.ucomp > -2.0F) {
-               this.ucomp = (float)(this.ucomp - 0.5 * this.cd.airs[this.cn]);
+               this.ucomp = (float)(this.ucomp - 0.5 * this.cd.airs[this.cn] * effBuildMult);
             }
 
             if (var1.down) {
                if (this.dcomp == 0.0F) {
-                  this.dcomp = 10.0F + (this.scy[0] + 50.0F) / 20.0F;
+                  this.dcomp = (10.0F + (this.scy[0] + 50.0F) / 20.0F) * effBuildMult;
                   if (this.dcomp < 5.0F) {
                      this.dcomp = 5.0F;
                   }
 
-                  if (this.dcomp > 10.0F) {
-                     this.dcomp = 10.0F;
+                  if (this.dcomp > 10.0F * effBuildMult) {
+                     this.dcomp = 10.0F * effBuildMult;
                   }
 
-                  this.dcomp = this.dcomp * this.cd.airs[this.cn];
+                  this.dcomp = this.dcomp * this.cd.airs[this.cn] * effBuildMult;
                }
 
-               if (this.dcomp < 20.0F) {
-                  this.dcomp = (float)(this.dcomp + 0.5 * this.cd.airs[this.cn]);
+               if (this.dcomp < 20.0F * effBuildMult) {
+                  this.dcomp = (float)(this.dcomp + 0.5 * this.cd.airs[this.cn] * effBuildMult);
                }
 
-               var16 = -this.cd.airc[this.cn];
+               var16 = -this.cd.airc[this.cn] * effRotMult;
             } else if (this.dcomp != 0.0F && this.ucomp > -2.0F) {
-               this.dcomp = (float)(this.dcomp - 0.5 * this.cd.airs[this.cn]);
+               this.dcomp = (float)(this.dcomp - 0.5 * this.cd.airs[this.cn] * effBuildMult);
             }
 
             if (var1.left) {
                if (this.lcomp == 0.0F) {
-                  this.lcomp = 5.0F;
+                  this.lcomp = 5.0F * effBuildMult;
                }
 
-               if (this.lcomp < 20.0F) {
-                  this.lcomp = this.lcomp + 2.0F * this.cd.airs[this.cn];
+               if (this.lcomp < 20.0F * effBuildMult) {
+                  this.lcomp = this.lcomp + 2.0F * this.cd.airs[this.cn] * effBuildMult;
                }
 
-               var14 = -this.cd.airc[this.cn] * this.m.cos(var2.xz) * var5;
-               var15 = -this.cd.airc[this.cn] * this.m.sin(var2.xz) * var5;
+               var14 = -this.cd.airc[this.cn] * effRotMult * this.m.cos(var2.xz) * var5;
+               var15 = -this.cd.airc[this.cn] * effRotMult * this.m.sin(var2.xz) * var5;
             } else if (this.lcomp > 0.0F) {
-               this.lcomp = this.lcomp - 2.0F * this.cd.airs[this.cn];
+               this.lcomp = this.lcomp - 2.0F * this.cd.airs[this.cn] * effBuildMult;
             }
 
             if (var1.right) {
                if (this.rcomp == 0.0F) {
-                  this.rcomp = 5.0F;
+                  this.rcomp = 5.0F * effBuildMult;
                }
 
-               if (this.rcomp < 20.0F) {
-                  this.rcomp = this.rcomp + 2.0F * this.cd.airs[this.cn];
+               if (this.rcomp < 20.0F * effBuildMult) {
+                  this.rcomp = this.rcomp + 2.0F * this.cd.airs[this.cn] * effBuildMult;
                }
 
-               var14 = this.cd.airc[this.cn] * this.m.cos(var2.xz) * var5;
-               var15 = this.cd.airc[this.cn] * this.m.sin(var2.xz) * var5;
+               var14 = this.cd.airc[this.cn] * effRotMult * this.m.cos(var2.xz) * var5;
+               var15 = this.cd.airc[this.cn] * effRotMult * this.m.sin(var2.xz) * var5;
             } else if (this.rcomp > 0.0F) {
-               this.rcomp = this.rcomp - 2.0F * this.cd.airs[this.cn];
+               this.rcomp = this.rcomp - 2.0F * this.cd.airs[this.cn] * effBuildMult;
             }
 
-            this.pzy = (int)(this.pzy + (this.dcomp - this.ucomp) * this.m.cos(this.pxy));
+            this.pzy = (int)(this.pzy + (this.dcomp - this.ucomp) * this.m.cos(this.pxy) * effRotMult);
             if (var7) {
-               var2.xz = (int)(var2.xz + (this.dcomp - this.ucomp) * this.m.sin(this.pxy));
+               var2.xz = (int)(var2.xz + (this.dcomp - this.ucomp) * this.m.sin(this.pxy) * effRotMult);
             } else {
-               var2.xz = (int)(var2.xz - (this.dcomp - this.ucomp) * this.m.sin(this.pxy));
+               var2.xz = (int)(var2.xz - (this.dcomp - this.ucomp) * this.m.sin(this.pxy) * effRotMult);
             }
 
-            this.pxy = (int)(this.pxy + (this.rcomp - this.lcomp));
+            this.pxy = (int)(this.pxy + (this.rcomp - this.lcomp) * effRotMult);
          } else {
             float var55 = this.power;
             if (var55 < 40.0F) {
@@ -448,16 +522,16 @@ public class Mad {
                if (var1.left) {
                   if (!this.pl) {
                      if (this.lcomp == 0.0F) {
-                        this.lcomp = 5.0F * this.cd.airs[this.cn];
+                        this.lcomp = 5.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
 
-                     if (this.lcomp < 20.0F) {
-                        this.lcomp = this.lcomp + 2.0F * this.cd.airs[this.cn];
+                     if (this.lcomp < 20.0F * effBuildMult) {
+                        this.lcomp = this.lcomp + 2.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
                   }
                } else {
                   if (this.lcomp > 0.0F) {
-                     this.lcomp = this.lcomp - 2.0F * this.cd.airs[this.cn];
+                     this.lcomp = this.lcomp - 2.0F * this.cd.airs[this.cn] * effBuildMult;
                   }
 
                   this.pl = false;
@@ -466,16 +540,16 @@ public class Mad {
                if (var1.right) {
                   if (!this.pr) {
                      if (this.rcomp == 0.0F) {
-                        this.rcomp = 5.0F * this.cd.airs[this.cn];
+                        this.rcomp = 5.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
 
-                     if (this.rcomp < 20.0F) {
-                        this.rcomp = this.rcomp + 2.0F * this.cd.airs[this.cn];
+                     if (this.rcomp < 20.0F * effBuildMult) {
+                        this.rcomp = this.rcomp + 2.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
                   }
                } else {
                   if (this.rcomp > 0.0F) {
-                     this.rcomp = this.rcomp - 2.0F * this.cd.airs[this.cn];
+                     this.rcomp = this.rcomp - 2.0F * this.cd.airs[this.cn] * effBuildMult;
                   }
 
                   this.pr = false;
@@ -484,16 +558,16 @@ public class Mad {
                if (var1.up) {
                   if (!this.pu) {
                      if (this.ucomp == 0.0F) {
-                        this.ucomp = 5.0F * this.cd.airs[this.cn];
+                        this.ucomp = 5.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
 
-                     if (this.ucomp < 20.0F) {
-                        this.ucomp = this.ucomp + 2.0F * this.cd.airs[this.cn];
+                     if (this.ucomp < 20.0F * effBuildMult) {
+                        this.ucomp = this.ucomp + 2.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
                   }
                } else {
                   if (this.ucomp > 0.0F) {
-                     this.ucomp = this.ucomp - 2.0F * this.cd.airs[this.cn];
+                     this.ucomp = this.ucomp - 2.0F * this.cd.airs[this.cn] * effBuildMult;
                   }
 
                   this.pu = false;
@@ -502,29 +576,29 @@ public class Mad {
                if (var1.down) {
                   if (!this.pd) {
                      if (this.dcomp == 0.0F) {
-                        this.dcomp = 5.0F * this.cd.airs[this.cn];
+                        this.dcomp = 5.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
 
-                     if (this.dcomp < 20.0F) {
-                        this.dcomp = this.dcomp + 2.0F * this.cd.airs[this.cn];
+                     if (this.dcomp < 20.0F * effBuildMult) {
+                        this.dcomp = this.dcomp + 2.0F * this.cd.airs[this.cn] * effBuildMult;
                      }
                   }
                } else {
                   if (this.dcomp > 0.0F) {
-                     this.dcomp = this.dcomp - 2.0F * this.cd.airs[this.cn];
+                     this.dcomp = this.dcomp - 2.0F * this.cd.airs[this.cn] * effBuildMult;
                   }
 
                   this.pd = false;
                }
 
-               this.pzy = (int)(this.pzy + (this.dcomp - this.ucomp) * this.m.cos(this.pxy));
+               this.pzy = (int)(this.pzy + (this.dcomp - this.ucomp) * this.m.cos(this.pxy) * effRotMult);
                if (var7) {
-                  var2.xz = (int)(var2.xz + (this.dcomp - this.ucomp) * this.m.sin(this.pxy));
+                  var2.xz = (int)(var2.xz + (this.dcomp - this.ucomp) * this.m.sin(this.pxy) * effRotMult);
                } else {
-                  var2.xz = (int)(var2.xz - (this.dcomp - this.ucomp) * this.m.sin(this.pxy));
+                  var2.xz = (int)(var2.xz - (this.dcomp - this.ucomp) * this.m.sin(this.pxy) * effRotMult);
                }
 
-               this.pxy = (int)(this.pxy + (this.rcomp - this.lcomp));
+               this.pxy = (int)(this.pxy + (this.rcomp - this.lcomp) * effRotMult);
             }
          }
       }

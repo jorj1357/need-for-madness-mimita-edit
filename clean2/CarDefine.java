@@ -562,7 +562,9 @@ public class CarDefine implements Runnable {
       // lead oxide
       // 1.43F,
       // idk waht it does but  its cool 6 3 2026
-      1.7F,
+      // 1.7F,
+      // this is momentummmmmm 6 3 2026 momentum big 
+      9.9F,
       1.48F,
       1.35F,
       1.7F,
@@ -612,6 +614,28 @@ public class CarDefine implements Runnable {
       0.0F,
       0.0F,
       0.0F
+   };
+   // i added this this isnt  standard in nfm 6 3 2026 
+   float[] outdammult = new float[]{
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+
+      // Lead Oxide
+      10.0F,
+
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F,
+      1.0F
    };
    float[] comprad = new float[]{
       0.5F,

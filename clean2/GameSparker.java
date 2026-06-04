@@ -302,6 +302,11 @@ public class GameSparker extends Applet implements Runnable {
             } else {
                this.checkmemory(var6);
                var6.inishcarselect(var4);
+               if (Madness.autotestMode != 0) {
+                  var6.sc[0] = 6;
+                  System.out.println("[AUTOTEST] selected Lead Oxide for verification");
+               }
+
                var27 = 0;
                var6.fase = 7;
                this.mvect = 50;
@@ -4091,6 +4096,10 @@ public class GameSparker extends Applet implements Runnable {
 
    @Override
    public boolean keyDown(Event var1, int var2) {
+      if (this.u[0] == null) {
+         return false;
+      }
+
       if (!this.exwist) {
          if (this.u[0].multion < 2) {
             if (var2 == 1004) {
@@ -4185,6 +4194,10 @@ public class GameSparker extends Applet implements Runnable {
 
    @Override
    public boolean keyUp(Event var1, int var2) {
+      if (this.u[0] == null) {
+         return false;
+      }
+
       if (!this.exwist) {
          if (this.u[0].multion < 2) {
             if (var2 == 1004) {
