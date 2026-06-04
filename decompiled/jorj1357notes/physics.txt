@@ -1,0 +1,62 @@
+physics(
+  0:  Handbrake,
+  1:  Turning Sensitivity,
+  2:  Tire Grip,
+  3:  Bouncing,
+  4:  Empty / unused / hidden anti-cheat message slot,
+
+  5:  Lifts Others,
+  6:  Gets Lifted,
+  7:  Pushes Others,
+  8:  Gets Pushed,
+  9:  Aerial Rotation Speed,
+  10: Aerial Control / Gliding,
+
+  11: Crash Radius,
+  12: Crash Magnitude,
+  13: Roof Destruction,
+
+  14: Engine Sound Type,
+  15: actmag / calculated crash deformation value
+)
+
+5 16 2026 730 pm testing is this true 
+
+version 1 definition
+
+physics(
+  drive1, drive2, drive3, drive4, unused,
+  collision1, collision2, collision3, collision4,
+  air1, air2,
+  crashLook1, crashLook2, crashLook3,
+  engineSound,
+  generatedCrashValue
+)
+
+also "For stats, remember the code also checks stat(...) tightly:
+ each stat must be 16 to 200, and the total must equal one of these 
+ class totals:
+ 520, 560, 600, 640, 680
+ 
+ "
+
+5 16 2026 738 pm i think its this 
+
+stat(
+topSpeed,
+acceleration,
+handling,
+stunts,
+strength
+)
+
+also these 
+
+where these are ? idk 5 16 2026 739 pm 
+maxmag
+dammult
+outdam
+push
+revpush
+moment
+msquash
