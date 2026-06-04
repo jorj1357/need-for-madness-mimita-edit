@@ -2694,13 +2694,29 @@ public class Mad {
                      }
 
                      this.scx[var15] = this.scx[var15] - var17;
-                     var11 += this.regx(var15, -var17 * this.cd.moment[this.cn] * var14, var1);
+                     // var11 += this.regx(var15, -var17 * this.cd.moment[this.cn] * var14, var1);
+                     var11 += this.regx(
+                        var15,
+                        -var17
+                        * this.cd.moment[this.cn]
+                        * this.cd.outdammult[this.cn]
+                        * var14,
+                        var1
+                     );
                      this.scy[var15] = this.scy[var15] - this.cd.revlift[this.cn];
                      if (this.im == this.xt.im) {
                         var2.colidim = true;
                      }
 
-                     var19 += var2.regy(var16, this.cd.revlift[this.cn] * 7, var3);
+                     // var19 += var2.regy(var16, this.cd.revlift[this.cn] * 7, var3);
+                     var19 += var2.regx(
+                        var16,
+                        var18
+                        * this.cd.moment[this.cn]
+                        * this.cd.outdammult[this.cn]
+                        * var14,
+                        var3
+                     );
                      if (var2.colidim) {
                         var2.colidim = false;
                      }
