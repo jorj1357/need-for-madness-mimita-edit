@@ -23,20 +23,30 @@ public class CheckPoints {
    int trackvol = 200;
    int top20 = 0;
    int nto = 0;
-   int[] pos = new int[]{7, 7, 7, 7, 7, 7, 7, 7};
-   int[] clear = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-   int[] dested = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-   float[] magperc = new float[]{0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
+   int[] pos = this.defaultPositions();
+   int[] clear = new int[Madness.maxPlayers()];
+   int[] dested = new int[Madness.maxPlayers()];
+   float[] magperc = new float[Madness.maxPlayers()];
    int wasted = 0;
    boolean haltall = false;
    int pcleared = 0;
-   int[] opx = new int[8];
-   int[] opz = new int[8];
-   int[] onscreen = new int[8];
-   int[] omxz = new int[8];
+   int[] opx = new int[Madness.maxPlayers()];
+   int[] opz = new int[Madness.maxPlayers()];
+   int[] onscreen = new int[Madness.maxPlayers()];
+   int[] omxz = new int[Madness.maxPlayers()];
    int catchfin = 0;
    int postwo = 0;
    float prox = 0.0F;
+
+   private int[] defaultPositions() {
+      int[] var1 = new int[Madness.maxPlayers()];
+
+      for (int var2 = 0; var2 < var1.length; var2++) {
+         var1[var2] = var1.length;
+      }
+
+      return var1;
+   }
 
    public void checkstat(Mad[] var1, ContO[] var2, Record var3, int var4, int var5, int var6) {
       if (!this.haltall) {

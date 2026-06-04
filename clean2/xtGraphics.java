@@ -75,25 +75,25 @@ public class xtGraphics extends Panel implements Runnable {
    int discon = 0;
    int cntptrys = 5;
    int[] delays = new int[]{600, 600, 600};
-   int nplayers = 7;
+   int nplayers = Madness.maxPlayers();
    int im = 0;
-   String[] plnames = new String[]{"", "", "", "", "", "", "", ""};
+   String[] plnames = this.newPlayerStrings();
    int osc = 10;
    int minsl = 0;
    int maxsl = 15;
-   int[] sc = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-   int[] xstart = new int[]{0, -350, 350, 0, -350, 350, 0, 0};
-   int[] zstart = new int[]{-760, -380, -380, 0, 380, 380, 760, 0};
-   float[][] allrnp = new float[8][6];
-   boolean[] isbot = new boolean[8];
+   int[] sc = new int[Madness.maxPlayers()];
+   int[] xstart = new int[Madness.maxPlayers()];
+   int[] zstart = new int[Madness.maxPlayers()];
+   float[][] allrnp = new float[Madness.maxPlayers()][6];
+   boolean[] isbot = new boolean[Madness.maxPlayers()];
    int clangame = 0;
    boolean clanchat = false;
-   String[] pclan = new String[]{"", "", "", "", "", "", "", ""};
+   String[] pclan = this.newPlayerStrings();
    String gaclan = "";
    int lcarx = 0;
    int lcary = 0;
    int lcarz = 0;
-   int[] dcrashes = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+   int[] dcrashes = new int[Madness.maxPlayers()];
    int beststunt = 0;
    int laptime = 0;
    int fastestlap = 0;
@@ -253,8 +253,8 @@ public class xtGraphics extends Panel implements Runnable {
    int pnext = 0;
    int pback = 0;
    int pstar = 0;
-   Image[] orank = new Image[8];
-   Image[] rank = new Image[8];
+   Image[] orank = new Image[Madness.maxPlayers()];
+   Image[] rank = new Image[Madness.maxPlayers()];
    Image[] ocntdn = new Image[4];
    Image[] cntdn = new Image[4];
    int gocnt = 0;
@@ -302,7 +302,7 @@ public class xtGraphics extends Panel implements Runnable {
    int posit = 0;
    int wasted = 0;
    int laps = 0;
-   int[] dested = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+   int[] dested = new int[Madness.maxPlayers()];
    int dmcnt = 0;
    boolean dmflk = false;
    int pwcnt = 0;
@@ -402,6 +402,69 @@ public class xtGraphics extends Panel implements Runnable {
    int flyr = 0;
    int flyrdest = 0;
    int flang = 0;
+
+   private String[] newPlayerStrings() {
+      String[] var1 = new String[Madness.maxPlayers()];
+
+      for (int var2 = 0; var2 < var1.length; var2++) {
+         var1[var2] = "";
+      }
+
+      return var1;
+   }
+
+   public void prepareSpawnPositions() {
+      int var1 = this.nplayers;
+      if (var1 < 1) {
+         var1 = 1;
+      }
+
+      if (var1 > Madness.maxPlayers()) {
+         System.out.println("[MAX_PLAYERS] WARNING requested spawn count " + var1 + " exceeds slots " + Madness.maxPlayers() + "; clamping");
+         var1 = Madness.maxPlayers();
+         this.nplayers = var1;
+      }
+
+      if (var1 == 7) {
+         int[] var2 = new int[]{0, -350, 350, 0, -350, 350, 0};
+         int[] var3 = new int[]{-760, -380, -380, 0, 380, 380, 760};
+
+         for (int var4 = 0; var4 < var1; var4++) {
+            this.xstart[var4] = var2[var4];
+            this.zstart[var4] = var3[var4];
+         }
+      } else {
+         int var8 = Math.max(3, (int)Math.ceil(Math.sqrt((double)var1)));
+         int var9 = (int)Math.ceil((double)var1 / var8);
+         int var10 = 700;
+         int var11 = 520;
+
+         for (int var5 = 0; var5 < var1; var5++) {
+            int var6 = var5 / var8;
+            int var7 = var5 % var8;
+            int var12 = Math.min(var8, var1 - var6 * var8);
+            int var13 = var7 - (var12 - 1) / 2;
+            this.xstart[var5] = var13 * var10;
+            if (var12 % 2 == 0) {
+               this.xstart[var5] += var10 / 2;
+            }
+
+            if (var6 % 2 == 1) {
+               this.xstart[var5] += var10 / 4;
+            }
+
+            this.zstart[var5] = (var6 - (var9 - 1) / 2) * var11;
+            if (var9 % 2 == 0) {
+               this.zstart[var5] += var11 / 2;
+            }
+         }
+      }
+
+      System.out.println("[MAX_PLAYERS] actual spawned car count=" + this.nplayers);
+      for (int var14 = 0; var14 < this.nplayers; var14++) {
+         System.out.println("[MAX_PLAYERS] spawn[" + var14 + "] x=" + this.xstart[var14] + ", z=" + this.zstart[var14]);
+      }
+   }
 
    public xtGraphics(Medium var1, CarDefine var2, Graphics2D var3, GameSparker var4) {
       this.m = var1;
@@ -1522,7 +1585,7 @@ public class xtGraphics extends Panel implements Runnable {
       this.winner = false;
       this.wasted = 0;
 
-      for (int var2 = 0; var2 < 8; var2++) {
+      for (int var2 = 0; var2 < Madness.maxPlayers(); var2++) {
          this.dested[var2] = 0;
          this.isbot[var2] = false;
          this.dcrashes[var2] = 0;
@@ -2618,8 +2681,9 @@ public class xtGraphics extends Panel implements Runnable {
                }
 
                this.app.gmode.move(400 - this.app.gmode.getWidth() / 2, 395);
-               if (this.app.gmode.getSelectedIndex() == 0 && this.nplayers != 7) {
-                  this.nplayers = 7;
+               if (this.app.gmode.getSelectedIndex() == 0 && this.nplayers != Madness.maxPlayers()) {
+                  this.nplayers = Madness.maxPlayers();
+                  this.prepareSpawnPositions();
                   this.fase = 2;
                   this.app.requestFocus();
                }
@@ -5233,22 +5297,9 @@ public class xtGraphics extends Panel implements Runnable {
    }
 
    public void inishcarselect(ContO[] var1) {
-      this.nplayers = 7;
+      this.nplayers = Madness.maxPlayers();
       this.im = 0;
-      this.xstart[0] = 0;
-      this.xstart[1] = -350;
-      this.xstart[2] = 350;
-      this.xstart[3] = 0;
-      this.xstart[4] = -350;
-      this.xstart[5] = 350;
-      this.xstart[6] = 0;
-      this.zstart[0] = -760;
-      this.zstart[1] = -380;
-      this.zstart[2] = -380;
-      this.zstart[3] = 0;
-      this.zstart[4] = 380;
-      this.zstart[5] = 380;
-      this.zstart[6] = 760;
+      this.prepareSpawnPositions();
       this.onmsc = -1;
       this.remi = false;
       this.basefase = 0;
@@ -10036,8 +10087,12 @@ public class xtGraphics extends Panel implements Runnable {
       this.pos = this.loadsnap(this.opos);
       this.sped = this.loadsnap(this.osped);
 
-      for (int var2 = 0; var2 < 8; var2++) {
-         this.rank[var2] = this.loadsnap(this.orank[var2]);
+      for (int var2 = 0; var2 < Madness.maxPlayers(); var2++) {
+         if (var2 < 8 && this.orank[var2] != null) {
+            this.rank[var2] = this.loadsnap(this.orank[var2]);
+         } else {
+            this.rank[var2] = this.rank[Math.min(var2 - 1, 7)];
+         }
       }
 
       for (int var3 = 0; var3 < 4; var3++) {

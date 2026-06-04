@@ -1159,8 +1159,8 @@ public class Lobby implements Runnable {
                   this.xt.nplayers = 1;
                }
 
-               if (this.xt.nplayers > 8) {
-                  this.xt.nplayers = 8;
+               if (this.xt.nplayers > Madness.maxPlayers()) {
+                  this.xt.nplayers = Madness.maxPlayers();
                }
 
                for (int var54 = 0; var54 < this.xt.nplayers; var54++) {
@@ -1412,8 +1412,8 @@ public class Lobby implements Runnable {
                   this.xt.nplayers = 1;
                }
 
-               if (this.xt.nplayers > 8) {
-                  this.xt.nplayers = 8;
+               if (this.xt.nplayers > Madness.maxPlayers()) {
+                  this.xt.nplayers = Madness.maxPlayers();
                }
 
                this.xt.im = this.getvalue(var44, 2) + this.xt.nplayers;

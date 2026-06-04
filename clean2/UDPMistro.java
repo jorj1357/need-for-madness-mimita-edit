@@ -9,7 +9,7 @@ public class UDPMistro implements Runnable {
    int runon = 0;
    udpOnline[] udpc = new udpOnline[20];
    int porturn = 0;
-   udpServe[] usrv = new udpServe[13];
+   udpServe[] usrv = new udpServe[Madness.maxPlayers() + 5];
    int diledelay = 0;
    long sendat = 0L;
    String sendcheck = "";
@@ -21,17 +21,17 @@ public class UDPMistro implements Runnable {
    boolean go = false;
    int im = 0;
    int nplayers = 0;
-   String[][] info = new String[14][3];
-   int[][] frame = new int[14][3];
-   int[] lframe = new int[8];
-   int[] force = new int[8];
-   int[] lcframe = new int[8];
-   boolean[] isbot = new boolean[8];
+   String[][] info = new String[Madness.maxPlayers() + 6][3];
+   int[][] frame = new int[Madness.maxPlayers() + 6][3];
+   int[] lframe = new int[Madness.maxPlayers()];
+   int[] force = new int[Madness.maxPlayers()];
+   int[] lcframe = new int[Madness.maxPlayers()];
+   boolean[] isbot = new boolean[Madness.maxPlayers()];
    Socket socket;
    BufferedReader din;
    PrintWriter dout;
-   int[] gocnt = new int[8];
-   int[] out = new int[8];
+   int[] gocnt = new int[Madness.maxPlayers()];
+   int[] out = new int[Madness.maxPlayers()];
    String xtserver = "";
    int xtservport = 0;
    int pgame = 0;
@@ -51,7 +51,7 @@ public class UDPMistro implements Runnable {
       this.im = var4;
       this.nplayers = var3;
 
-      for (int var7 = 0; var7 < 8; var7++) {
+      for (int var7 = 0; var7 < Madness.maxPlayers(); var7++) {
          for (int var6 = 0; var6 < 3; var6++) {
             this.frame[var7][var6] = -1;
             this.info[var7][var6] = "";
@@ -104,7 +104,7 @@ public class UDPMistro implements Runnable {
       this.im = var3;
       this.nplayers = var2;
 
-      for (int var7 = 0; var7 < 8; var7++) {
+      for (int var7 = 0; var7 < Madness.maxPlayers(); var7++) {
          for (int var5 = 0; var5 < 3; var5++) {
             this.frame[var7][var5] = -1;
             this.info[var7][var5] = "";
@@ -160,7 +160,7 @@ public class UDPMistro implements Runnable {
       this.xtservport = var3;
       this.pgame = var4;
 
-      for (int var5 = 0; var5 < 8; var5++) {
+      for (int var5 = 0; var5 < Madness.maxPlayers(); var5++) {
          this.gocnt[var5] = 3;
          this.out[var5] = 0;
 

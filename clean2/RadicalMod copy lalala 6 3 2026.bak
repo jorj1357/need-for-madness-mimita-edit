@@ -1,0 +1,253 @@
+// import ds.nfm.Module;
+// import ds.nfm.ModuleLoader;
+// import ds.nfm.ModuleSlayer;
+// import java.net.URL;
+
+// public class RadicalMod {
+//    SuperClip sClip;
+//    boolean playing = false;
+//    int loaded = 0;
+//    int rvol = 0;
+//    String imod = "";
+//    String pmod = "";
+
+//    public RadicalMod() {
+//       this.loaded = 0;
+//       System.gc();
+//    }
+
+//    public RadicalMod(String var1, int var2, int var3, int var4, boolean var5, boolean var6) {
+//       short sampleRate = 22000;
+
+//       var3 = (int)(var3 / 8000.0F * 2.0F * sampleRate);
+//       var2 = (int)(var2 * 0.8F);
+
+//       try {
+//          System.out.println("[RADICALMOD] Loading music: " + var1);
+
+//          Module module;
+
+//          if (!var6) {
+//             String path = "" + Madness.fpath + "" + var1 + "";
+//             System.out.println("[RADICALMOD] Local path: " + path);
+//             module = ModuleLoader.loadMod(path);
+//          } else {
+//             var1 = var1.replace(' ', '_');
+//             URL url = new URL("http://multiplayer.needformadness.com/tracks/music/" + var1 + ".zip");
+//             System.out.println("[RADICALMOD] Remote URL: " + url);
+//             module = ModuleLoader.loadMod(url);
+//          }
+
+//          if (module != null && module.isLoaded()) {
+//             ModuleSlayer slayer = ModuleLoader.prepareSlayer(module, var3, var2, var4);
+//             byte[] pcm = slayer.turnbytesNorm(var5);
+
+//             if (var5) {
+//                this.rvol = slayer.olav;
+//             }
+
+//             this.sClip = new SuperClip(pcm, slayer.oln, sampleRate);
+//             this.sClip.rollBackPos = slayer.rollBackPos;
+//             this.sClip.rollBackTrig = slayer.oln - slayer.rollBackTrig;
+
+//             this.loaded = 2;
+
+//             System.out.println("[RADICALMOD] Music ready. bytes=" + slayer.oln);
+//          } else {
+//             System.out.println("[RADICALMOD] Module failed to load: " + var1);
+//             this.loaded = 0;
+//          }
+//       } catch (Exception e) {
+//          System.out.println("[RADICALMOD] Error downloading/making Mod: " + e);
+//          e.printStackTrace();
+//          this.loaded = 0;
+//       }
+
+//       System.runFinalization();
+//       System.gc();
+//    }
+
+//    public RadicalMod(String var1) {
+//       this.loaded = 1;
+//       this.imod = "" + Madness.fpath + "" + var1 + "";
+//    }
+
+//    public RadicalMod(String var1, boolean var2) {
+//       this.loaded = 1;
+//       this.pmod = var1;
+//       this.loadpmod(true);
+//    }
+
+//    public void loadimod(boolean var1) {
+//       if (this.loaded == 1) {
+//          char var2 = 'ꯠ';
+//          short var3 = 160;
+
+//          if (var1) {
+//             var3 = 300;
+//          }
+
+//          byte var4 = 125;
+
+//          try {
+//             System.out.println("[RADICALMOD] Loading imod: " + this.imod);
+
+//             Module module = ModuleLoader.loadMod(this.imod);
+
+//             if (module != null && module.isLoaded()) {
+//                ModuleSlayer slayer = ModuleLoader.prepareSlayer(module, var2, var3, var4);
+//                byte[] pcm = slayer.turnbytesNorm(var1);
+
+//                if (var1) {
+//                   this.rvol = slayer.olav;
+//                }
+
+//                this.sClip = new SuperClip(pcm, slayer.oln, 22000);
+//                this.sClip.rollBackPos = slayer.rollBackPos;
+//                this.sClip.rollBackTrig = slayer.oln - slayer.rollBackTrig;
+
+//                this.loaded = 2;
+
+//                System.out.println("[RADICALMOD] imod ready. bytes=" + slayer.oln);
+//             } else {
+//                System.out.println("[RADICALMOD] imod failed to load: " + this.imod);
+//                this.loaded = 0;
+//             }
+//          } catch (Exception e) {
+//             System.out.println("[RADICALMOD] Error making imod: " + e);
+//             e.printStackTrace();
+//             this.loaded = 0;
+//          }
+
+//          System.runFinalization();
+//          System.gc();
+//       }
+//    }
+
+//    public void loadpmod(boolean var1) {
+//       if (this.loaded == 1) {
+//          char var2 = 'ꯠ';
+//          short var3 = 160;
+
+//          if (var1) {
+//             var3 = 300;
+//          }
+
+//          byte var4 = 125;
+
+//          try {
+//             System.out.println("[RADICALMOD] Loading pmod: " + this.pmod);
+
+//             Module module = ModuleLoader.loadMod(this.pmod);
+
+//             if (module != null && module.isLoaded()) {
+//                ModuleSlayer slayer = ModuleLoader.prepareSlayer(module, var2, var3, var4);
+//                byte[] pcm = slayer.turnbytesNorm(var1);
+
+//                if (var1) {
+//                   this.rvol = slayer.olav;
+//                }
+
+//                this.sClip = new SuperClip(pcm, slayer.oln, 22000);
+//                this.sClip.rollBackPos = slayer.rollBackPos;
+//                this.sClip.rollBackTrig = slayer.oln - slayer.rollBackTrig;
+
+//                this.loaded = 2;
+
+//                System.out.println("[RADICALMOD] pmod ready. bytes=" + slayer.oln);
+//             } else {
+//                System.out.println("[RADICALMOD] pmod failed to load: " + this.pmod);
+//                this.loaded = 0;
+//             }
+//          } catch (Exception e) {
+//             System.out.println("[RADICALMOD] Error making pmod: " + e);
+//             e.printStackTrace();
+//             this.loaded = 0;
+//          }
+
+//          System.runFinalization();
+//          System.gc();
+//       }
+//    }
+
+//    public void play() {
+//       if (!this.playing && this.loaded == 2 && this.sClip != null) {
+//          System.out.println("[RADICALMOD] play");
+
+//          this.sClip.play();
+
+//          if (this.sClip.stoped == 0) {
+//             this.playing = true;
+//          }
+//       }
+//    }
+
+//    public void resume() {
+//       if (!this.playing && this.loaded == 2 && this.sClip != null) {
+//          System.out.println("[RADICALMOD] resume");
+
+//          this.sClip.resume();
+
+//          if (this.sClip.stoped == 0) {
+//             this.playing = true;
+//          }
+//       }
+//    }
+
+//    public void stop() {
+//       if (this.playing && this.loaded == 2 && this.sClip != null) {
+//          System.out.println("[RADICALMOD] stop");
+
+//          this.sClip.stop();
+//          this.playing = false;
+//       }
+//    }
+
+//    protected void unloadimod() {
+//       if (this.loaded == 2) {
+//          if (this.playing && this.sClip != null) {
+//             this.sClip.stop();
+//             this.playing = false;
+//          }
+
+//          try {
+//             if (this.sClip != null) {
+//                this.sClip.close();
+//                this.sClip = null;
+//             }
+//          } catch (Exception e) {
+//             System.out.println("[RADICALMOD] Error closing imod: " + e);
+//             e.printStackTrace();
+//          }
+
+//          System.gc();
+//          this.loaded = 1;
+//       }
+//    }
+
+//    protected void unload() {
+//       if (this.playing && this.loaded == 2 && this.sClip != null) {
+//          this.sClip.stop();
+//          this.playing = false;
+//       }
+
+//       try {
+//          if (this.sClip != null) {
+//             this.sClip.close();
+//             this.sClip = null;
+//          }
+//       } catch (Exception e) {
+//          System.out.println("[RADICALMOD] Error closing music: " + e);
+//          e.printStackTrace();
+//       }
+
+//       try {
+//          this.imod = null;
+//       } catch (Exception e) {
+//          System.out.println("[RADICALMOD] Error clearing imod: " + e);
+//       }
+
+//       System.gc();
+//       this.loaded = 0;
+//    }
+// }

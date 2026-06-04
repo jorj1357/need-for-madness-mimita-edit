@@ -1,0 +1,219 @@
+// import java.io.File;
+// import javafx.application.Platform;
+// import javafx.embed.swing.JFXPanel;
+// import javafx.scene.media.Media;
+// import javafx.scene.media.MediaPlayer;
+
+// public class RadicalMod {
+
+//     private static boolean javafxInitialized = false;
+
+//     private MediaPlayer mediaPlayer;
+
+//     boolean playing = false;
+//     int loaded = 0;
+//     int rvol = 0;
+
+//     String imod = "";
+//     String pmod = "";
+
+//     public RadicalMod() {
+//         initJavaFX();
+//     }
+
+//     public RadicalMod(
+//             String var1,
+//             int var2,
+//             int var3,
+//             int var4,
+//             boolean var5,
+//             boolean var6
+//     ) {
+
+//         initJavaFX();
+
+//         try {
+
+//             String path;
+
+//             if (!var6) {
+//                 path = Madness.fpath + var1;
+//             } else {
+//                 path = var1;
+//             }
+
+//             System.out.println("[RADICALMOD] Loading MP3: " + path);
+
+//             File file = new File(path);
+
+//             String uri = file.toURI().toString();
+
+//             Media media = new Media(uri);
+
+//             mediaPlayer = new MediaPlayer(media);
+
+//             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+//             loaded = 2;
+
+//             System.out.println("[RADICALMOD] MP3 ready.");
+
+//         } catch (Exception e) {
+
+//             System.out.println("[RADICALMOD] Failed loading MP3.");
+
+//             e.printStackTrace();
+
+//             loaded = 0;
+//         }
+//     }
+
+//     public RadicalMod(String var1) {
+//         this.imod = Madness.fpath + var1;
+//         loadimod(true);
+//     }
+
+//     public RadicalMod(String var1, boolean var2) {
+//         this.pmod = var1;
+//         loadpmod(true);
+//     }
+
+//     private void initJavaFX() {
+
+//         if (!javafxInitialized) {
+
+//             try {
+
+//                 new JFXPanel();
+
+//                 Platform.setImplicitExit(false);
+
+//                 javafxInitialized = true;
+
+//                 System.out.println("[RADICALMOD] JavaFX initialized.");
+
+//             } catch (Exception e) {
+
+//                 System.out.println("[RADICALMOD] JavaFX init failed.");
+
+//                 e.printStackTrace();
+//             }
+//         }
+//     }
+
+//     public void loadimod(boolean var1) {
+
+//         try {
+
+//             System.out.println("[RADICALMOD] Loading imod MP3: " + imod);
+
+//             File file = new File(imod);
+
+//             Media media =
+//                     new Media(file.toURI().toString());
+
+//             mediaPlayer = new MediaPlayer(media);
+
+//             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+//             loaded = 2;
+
+//         } catch (Exception e) {
+
+//             e.printStackTrace();
+
+//             loaded = 0;
+//         }
+//     }
+
+//     public void loadpmod(boolean var1) {
+
+//         try {
+
+//             System.out.println("[RADICALMOD] Loading pmod MP3: " + pmod);
+
+//             File file = new File(pmod);
+
+//             Media media =
+//                     new Media(file.toURI().toString());
+
+//             mediaPlayer = new MediaPlayer(media);
+
+//             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+//             loaded = 2;
+
+//         } catch (Exception e) {
+
+//             e.printStackTrace();
+
+//             loaded = 0;
+//         }
+//     }
+
+//     public void play() {
+
+//         if (!playing && loaded == 2 && mediaPlayer != null) {
+
+//             System.out.println("[RADICALMOD] play");
+
+//             mediaPlayer.play();
+
+//             playing = true;
+//         }
+//     }
+
+//     public void resume() {
+
+//         if (!playing && loaded == 2 && mediaPlayer != null) {
+
+//             System.out.println("[RADICALMOD] resume");
+
+//             mediaPlayer.play();
+
+//             playing = true;
+//         }
+//     }
+
+//     public void stop() {
+
+//         if (playing && loaded == 2 && mediaPlayer != null) {
+
+//             System.out.println("[RADICALMOD] stop");
+
+//             mediaPlayer.pause();
+
+//             playing = false;
+//         }
+//     }
+
+//     protected void unloadimod() {
+
+//         stop();
+
+//         if (mediaPlayer != null) {
+
+//             mediaPlayer.dispose();
+
+//             mediaPlayer = null;
+//         }
+
+//         loaded = 1;
+//     }
+
+//     protected void unload() {
+
+//         stop();
+
+//         if (mediaPlayer != null) {
+
+//             mediaPlayer.dispose();
+
+//             mediaPlayer = null;
+//         }
+
+//         imod = null;
+
+//         loaded = 0;
+//     }
+// }

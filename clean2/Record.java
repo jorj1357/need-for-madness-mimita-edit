@@ -5,96 +5,106 @@ public class Record {
    int caught = 0;
    boolean hcaught = false;
    boolean prepit = true;
-   ContO[] ocar = new ContO[8];
+   ContO[] ocar = new ContO[Madness.maxPlayers()];
    int cntf = 50;
-   ContO[][] car = new ContO[6][8];
-   int[][] squash = new int[6][8];
-   int[] fix = new int[8];
-   int[] dest = new int[8];
-   int[][] x = new int[300][8];
-   int[][] y = new int[300][8];
-   int[][] z = new int[300][8];
-   int[][] xy = new int[300][8];
-   int[][] zy = new int[300][8];
-   int[][] xz = new int[300][8];
-   int[][] wxz = new int[300][8];
-   int[][] wzy = new int[300][8];
-   int[][] ns = new int[8][20];
-   int[][][] sspark = new int[8][20][30];
-   int[][][] sx = new int[8][20][30];
-   int[][][] sy = new int[8][20][30];
-   int[][][] sz = new int[8][20][30];
-   float[][][] smag = new float[8][20][30];
-   int[][][] scx = new int[8][20][30];
-   int[][][] scz = new int[8][20][30];
-   int[] nr = new int[8];
-   int[][] rspark = new int[8][200];
-   int[][] sprk = new int[8][200];
-   int[][] srx = new int[8][200];
-   int[][] sry = new int[8][200];
-   int[][] srz = new int[8][200];
-   float[][] rcx = new float[8][200];
-   float[][] rcy = new float[8][200];
-   float[][] rcz = new float[8][200];
-   int[][] nry = new int[8][4];
-   int[][][] ry = new int[8][4][7];
-   int[][][] magy = new int[8][4][7];
-   boolean[][] mtouch = new boolean[8][7];
-   int[][] nrx = new int[8][4];
-   int[][][] rx = new int[8][4][7];
-   int[][][] magx = new int[8][4][7];
-   int[][] nrz = new int[8][4];
-   int[][][] rz = new int[8][4][7];
-   int[][][] magz = new int[8][4][7];
+   ContO[][] car = new ContO[6][Madness.maxPlayers()];
+   int[][] squash = new int[6][Madness.maxPlayers()];
+   int[] fix = new int[Madness.maxPlayers()];
+   int[] dest = new int[Madness.maxPlayers()];
+   int[][] x = new int[300][Madness.maxPlayers()];
+   int[][] y = new int[300][Madness.maxPlayers()];
+   int[][] z = new int[300][Madness.maxPlayers()];
+   int[][] xy = new int[300][Madness.maxPlayers()];
+   int[][] zy = new int[300][Madness.maxPlayers()];
+   int[][] xz = new int[300][Madness.maxPlayers()];
+   int[][] wxz = new int[300][Madness.maxPlayers()];
+   int[][] wzy = new int[300][Madness.maxPlayers()];
+   int[][] ns = new int[Madness.maxPlayers()][20];
+   int[][][] sspark = new int[Madness.maxPlayers()][20][30];
+   int[][][] sx = new int[Madness.maxPlayers()][20][30];
+   int[][][] sy = new int[Madness.maxPlayers()][20][30];
+   int[][][] sz = new int[Madness.maxPlayers()][20][30];
+   float[][][] smag = new float[Madness.maxPlayers()][20][30];
+   int[][][] scx = new int[Madness.maxPlayers()][20][30];
+   int[][][] scz = new int[Madness.maxPlayers()][20][30];
+   int[] nr = new int[Madness.maxPlayers()];
+   int[][] rspark = new int[Madness.maxPlayers()][200];
+   int[][] sprk = new int[Madness.maxPlayers()][200];
+   int[][] srx = new int[Madness.maxPlayers()][200];
+   int[][] sry = new int[Madness.maxPlayers()][200];
+   int[][] srz = new int[Madness.maxPlayers()][200];
+   float[][] rcx = new float[Madness.maxPlayers()][200];
+   float[][] rcy = new float[Madness.maxPlayers()][200];
+   float[][] rcz = new float[Madness.maxPlayers()][200];
+   int[][] nry = new int[Madness.maxPlayers()][4];
+   int[][][] ry = new int[Madness.maxPlayers()][4][7];
+   int[][][] magy = new int[Madness.maxPlayers()][4][7];
+   boolean[][] mtouch = new boolean[Madness.maxPlayers()][7];
+   int[][] nrx = new int[Madness.maxPlayers()][4];
+   int[][][] rx = new int[Madness.maxPlayers()][4][7];
+   int[][][] magx = new int[Madness.maxPlayers()][4][7];
+   int[][] nrz = new int[Madness.maxPlayers()][4];
+   int[][][] rz = new int[Madness.maxPlayers()][4][7];
+   int[][][] magz = new int[Madness.maxPlayers()][4][7];
    int[] checkpoint = new int[300];
    boolean[] lastcheck = new boolean[300];
    int wasted = 0;
    int whenwasted = 0;
    int powered = 0;
    int closefinish = 0;
-   ContO[] starcar = new ContO[8];
-   int[] hsquash = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-   int[] hfix = new int[]{-1, -1, -1, -1, -1, -1, -1, -1};
-   int[] hdest = new int[]{-1, -1, -1, -1, -1, -1, -1, -1};
-   int[][] hx = new int[300][8];
-   int[][] hy = new int[300][8];
-   int[][] hz = new int[300][8];
-   int[][] hxy = new int[300][8];
-   int[][] hzy = new int[300][8];
-   int[][] hxz = new int[300][8];
-   int[][] hwxz = new int[300][8];
-   int[][] hwzy = new int[300][8];
-   int[][][] hsspark = new int[8][20][30];
-   int[][][] hsx = new int[8][20][30];
-   int[][][] hsy = new int[8][20][30];
-   int[][][] hsz = new int[8][20][30];
-   float[][][] hsmag = new float[8][20][30];
-   int[][][] hscx = new int[8][20][30];
-   int[][][] hscz = new int[8][20][30];
-   int[][] hrspark = new int[8][200];
-   int[][] hsprk = new int[8][200];
-   int[][] hsrx = new int[8][200];
-   int[][] hsry = new int[8][200];
-   int[][] hsrz = new int[8][200];
-   float[][] hrcx = new float[8][200];
-   float[][] hrcy = new float[8][200];
-   float[][] hrcz = new float[8][200];
-   int[][][] hry = new int[8][4][7];
-   int[][][] hmagy = new int[8][4][7];
-   int[][][] hrx = new int[8][4][7];
-   int[][][] hmagx = new int[8][4][7];
-   int[][][] hrz = new int[8][4][7];
-   int[][][] hmagz = new int[8][4][7];
-   boolean[][] hmtouch = new boolean[8][7];
+   ContO[] starcar = new ContO[Madness.maxPlayers()];
+   int[] hsquash = new int[Madness.maxPlayers()];
+   int[] hfix = this.newFilledPlayerInts(-1);
+   int[] hdest = this.newFilledPlayerInts(-1);
+   int[][] hx = new int[300][Madness.maxPlayers()];
+   int[][] hy = new int[300][Madness.maxPlayers()];
+   int[][] hz = new int[300][Madness.maxPlayers()];
+   int[][] hxy = new int[300][Madness.maxPlayers()];
+   int[][] hzy = new int[300][Madness.maxPlayers()];
+   int[][] hxz = new int[300][Madness.maxPlayers()];
+   int[][] hwxz = new int[300][Madness.maxPlayers()];
+   int[][] hwzy = new int[300][Madness.maxPlayers()];
+   int[][][] hsspark = new int[Madness.maxPlayers()][20][30];
+   int[][][] hsx = new int[Madness.maxPlayers()][20][30];
+   int[][][] hsy = new int[Madness.maxPlayers()][20][30];
+   int[][][] hsz = new int[Madness.maxPlayers()][20][30];
+   float[][][] hsmag = new float[Madness.maxPlayers()][20][30];
+   int[][][] hscx = new int[Madness.maxPlayers()][20][30];
+   int[][][] hscz = new int[Madness.maxPlayers()][20][30];
+   int[][] hrspark = new int[Madness.maxPlayers()][200];
+   int[][] hsprk = new int[Madness.maxPlayers()][200];
+   int[][] hsrx = new int[Madness.maxPlayers()][200];
+   int[][] hsry = new int[Madness.maxPlayers()][200];
+   int[][] hsrz = new int[Madness.maxPlayers()][200];
+   float[][] hrcx = new float[Madness.maxPlayers()][200];
+   float[][] hrcy = new float[Madness.maxPlayers()][200];
+   float[][] hrcz = new float[Madness.maxPlayers()][200];
+   int[][][] hry = new int[Madness.maxPlayers()][4][7];
+   int[][][] hmagy = new int[Madness.maxPlayers()][4][7];
+   int[][][] hrx = new int[Madness.maxPlayers()][4][7];
+   int[][][] hmagx = new int[Madness.maxPlayers()][4][7];
+   int[][][] hrz = new int[Madness.maxPlayers()][4][7];
+   int[][][] hmagz = new int[Madness.maxPlayers()][4][7];
+   boolean[][] hmtouch = new boolean[Madness.maxPlayers()][7];
    int[] hcheckpoint = new int[300];
    boolean[] hlastcheck = new boolean[300];
-   int[] cntdest = new int[8];
+   int[] cntdest = new int[Madness.maxPlayers()];
    int lastfr = 0;
 
    public Record(Medium var1) {
       this.m = var1;
       this.caught = 0;
       this.cotchinow(0);
+   }
+
+   private int[] newFilledPlayerInts(int var1) {
+      int[] var2 = new int[Madness.maxPlayers()];
+
+      for (int var3 = 0; var3 < var2.length; var3++) {
+         var2[var3] = var1;
+      }
+
+      return var2;
    }
 
    public void reset(ContO[] var1) {
@@ -105,7 +115,7 @@ public class Record {
       this.closefinish = 0;
       this.powered = 0;
 
-      for (int var2 = 0; var2 < 8; var2++) {
+      for (int var2 = 0; var2 < Madness.maxPlayers(); var2++) {
          if (this.prepit) {
             this.starcar[var2] = new ContO(var1[var2], 0, 0, 0, 0);
          }
@@ -116,13 +126,13 @@ public class Record {
       }
 
       for (int var5 = 0; var5 < 6; var5++) {
-         for (int var3 = 0; var3 < 8; var3++) {
+         for (int var3 = 0; var3 < Madness.maxPlayers(); var3++) {
             this.car[var5][var3] = new ContO(var1[var3], 0, 0, 0, 0);
             this.squash[var5][var3] = 0;
          }
       }
 
-      for (int var6 = 0; var6 < 8; var6++) {
+      for (int var6 = 0; var6 < Madness.maxPlayers(); var6++) {
          this.nr[var6] = 0;
 
          for (int var7 = 0; var7 < 200; var7++) {
@@ -157,7 +167,7 @@ public class Record {
       if (this.caught >= 300) {
          this.wasted = var1;
 
-         for (int var2 = 0; var2 < 8; var2++) {
+         for (int var2 = 0; var2 < Madness.maxPlayers(); var2++) {
             this.starcar[var2] = new ContO(this.car[0][var2], 0, 0, 0, 0);
             this.hsquash[var2] = this.squash[0][var2];
             this.hfix[var2] = this.fix[var2];
@@ -165,7 +175,7 @@ public class Record {
          }
 
          for (int var5 = 0; var5 < 300; var5++) {
-            for (int var3 = 0; var3 < 8; var3++) {
+            for (int var3 = 0; var3 < Madness.maxPlayers(); var3++) {
                this.hx[var5][var3] = this.x[var5][var3];
                this.hy[var5][var3] = this.y[var5][var3];
                this.hz[var5][var3] = this.z[var5][var3];
@@ -180,7 +190,7 @@ public class Record {
             this.hlastcheck[var5] = this.lastcheck[var5];
          }
 
-         for (int var6 = 0; var6 < 8; var6++) {
+         for (int var6 = 0; var6 < Madness.maxPlayers(); var6++) {
             for (int var9 = 0; var9 < 20; var9++) {
                for (int var4 = 0; var4 < 30; var4++) {
                   this.hsspark[var6][var9][var4] = this.sspark[var6][var9][var4];
@@ -205,7 +215,7 @@ public class Record {
             }
          }
 
-         for (int var7 = 0; var7 < 8; var7++) {
+         for (int var7 = 0; var7 < Madness.maxPlayers(); var7++) {
             for (int var11 = 0; var11 < 4; var11++) {
                for (int var13 = 0; var13 < 7; var13++) {
                   this.hry[var7][var11][var13] = this.ry[var7][var11][var13];
@@ -218,7 +228,7 @@ public class Record {
             }
          }
 
-         for (int var8 = 0; var8 < 8; var8++) {
+         for (int var8 = 0; var8 < Madness.maxPlayers(); var8++) {
             for (int var12 = 0; var12 < 7; var12++) {
                this.hmtouch[var8][var12] = this.mtouch[var8][var12];
             }
@@ -895,3 +905,4 @@ public class Record {
       return (var1 - var2) * (var1 - var2) + (var3 - var4) * (var3 - var4);
    }
 }
+

@@ -54,7 +54,7 @@ public class GameSparker extends Applet implements Runnable {
    Image[] carmaker = new Image[2];
    Image[] stagemaker = new Image[2];
    int showsize = 0;
-   Control[] u = new Control[8];
+   Control[] u = new Control[Madness.maxPlayers()];
    int mouses = 0;
    int xm = 0;
    int ym = 0;
@@ -68,6 +68,9 @@ public class GameSparker extends Applet implements Runnable {
    int mvect = 100;
    int lmxz = 0;
    int shaka = 0;
+   long lastHighPlayerFrameAt = 0L;
+   long highPlayerFrameTotal = 0L;
+   int highPlayerFrameCount = 0;
    boolean applejava = false;
    TextField tnick;
    TextField tpass;
@@ -142,9 +145,9 @@ public class GameSparker extends Applet implements Runnable {
       Record var12 = new Record(var1);
       this.loadbase(var4, var1, var2, var6, false);
       ContO[] var13 = new ContO[610];
-      Mad[] var14 = new Mad[8];
+      Mad[] var14 = new Mad[Madness.maxPlayers()];
 
-      for (int var15 = 0; var15 < 8; var15++) {
+      for (int var15 = 0; var15 < Madness.maxPlayers(); var15++) {
          var14[var15] = new Mad(var5, var1, var12, var6, var15);
          this.u[var15] = new Control(var1);
       }
@@ -1813,7 +1816,7 @@ public class GameSparker extends Applet implements Runnable {
          }
 
          this.repaint();
-         if (var6.im > -1 && var6.im < 8) {
+         if (var6.im > -1 && var6.im < Madness.maxPlayers()) {
             int var54 = 0;
             if (var6.multion == 2 || var6.multion == 3) {
                var54 = var6.im;
@@ -1826,6 +1829,7 @@ public class GameSparker extends Applet implements Runnable {
 
          var16 = new Date();
          long var55 = var16.getTime();
+         this.logHighPlayerFrameTiming(var6.nplayers, var6.fase, var55);
          if (var6.fase != 0 && var6.fase != -1 && var6.fase != -3 && var6.fase != 7001) {
             if (var22) {
                var23 = 30;
@@ -1918,6 +1922,37 @@ public class GameSparker extends Applet implements Runnable {
          System.out.println("=== CRASH ===");
          e.printStackTrace();
       }
+   }
+
+   private void logHighPlayerFrameTiming(int var1, int var2, long var3) {
+      if (var1 < 20) {
+         this.lastHighPlayerFrameAt = 0L;
+         this.highPlayerFrameTotal = 0L;
+         this.highPlayerFrameCount = 0;
+         return;
+      }
+
+      if (this.lastHighPlayerFrameAt != 0L) {
+         long var5 = var3 - this.lastHighPlayerFrameAt;
+         this.highPlayerFrameTotal += var5;
+         this.highPlayerFrameCount++;
+         if (this.highPlayerFrameCount >= 120) {
+            System.out.println(
+               "[MAX_PLAYERS] frame timing nplayers="
+                  + var1
+                  + ", fase="
+                  + var2
+                  + ", avgMs="
+                  + this.highPlayerFrameTotal / this.highPlayerFrameCount
+                  + ", lastMs="
+                  + var5
+            );
+            this.highPlayerFrameTotal = 0L;
+            this.highPlayerFrameCount = 0;
+         }
+      }
+
+      this.lastHighPlayerFrameAt = var3;
    }
 
    public void checkmemory(xtGraphics var1) {
@@ -2542,10 +2577,10 @@ public class GameSparker extends Applet implements Runnable {
       }
 
       if (var6.gmode == 1) {
-         var6.nplayers = 5;
-         var6.xstart[4] = 0;
-         var6.zstart[4] = 760;
+         var6.nplayers = Madness.maxPlayers();
       }
+
+      var6.prepareSpawnPositions();
 
       var4.nt = 0;
       this.nob = var6.nplayers;
@@ -2691,7 +2726,7 @@ public class GameSparker extends Applet implements Runnable {
 
             if (var14.startsWith("set")) {
                int var35 = this.getint("set", var14, 0);
-               if (var6.nplayers == 8) {
+               if (var6.nplayers >= 8) {
                   if (var35 == 47) {
                      var35 = 76;
                   }
