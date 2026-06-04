@@ -82,6 +82,11 @@ public class xtGraphics extends Panel implements Runnable {
    int minsl = 0;
    int maxsl = 15;
    int[] sc = new int[Madness.playerSlots()];
+   int aiCarMode = 0;
+   int forcedCarId = 13;
+   int[] aiWeightedCarIds = new int[]{13, 11, 14};
+   int[] aiWeightedCarCounts = new int[]{8, 8, 8};
+   boolean debugAiCarAssignments = true;
    int[] xstart = new int[Madness.playerSlots()];
    int[] zstart = new int[Madness.playerSlots()];
    float[][] allrnp = new float[Madness.playerSlots()][6];
@@ -7363,245 +7368,331 @@ public class xtGraphics extends Panel implements Runnable {
     }
 
     public void sortcars(int n) {
-        if (n != 0) {
-            int n2;
-            int n3;
-            for (int i = 1; i < 7; ++i) {
-                this.sc[i] = -1;
+        if (n == 0) {
+            return;
+        }
+
+        int originalStage = n < 0 ? 27 : n;
+        int aiSlots = this.aiSlotCount();
+        if (aiSlots <= 0) {
+            return;
+        }
+
+        for (int i = 1; i <= aiSlots; ++i) {
+            this.sc[i] = -1;
+        }
+
+        if (this.aiCarMode == 1) {
+            this.assignRandomAiCars(aiSlots);
+            this.debugAiCars("random", originalStage, aiSlots);
+            return;
+        }
+
+        if (this.aiCarMode == 2) {
+            this.assignForcedAiCars(aiSlots);
+            this.debugAiCars("forced", originalStage, aiSlots);
+            return;
+        }
+
+        if (this.aiCarMode == 3) {
+            this.assignWeightedAiCars(aiSlots);
+            this.debugAiCars("weighted", originalStage, aiSlots);
+            return;
+        }
+
+        this.assignOriginalAiCars(originalStage, aiSlots);
+        this.debugAiCars("original", originalStage, aiSlots);
+    }
+
+    private int aiSlotCount() {
+        return Math.max(0, Math.min(this.nplayers, this.sc.length) - 1);
+    }
+
+    private void assignRandomAiCars(int n) {
+        for (int i = 1; i <= n; ++i) {
+            this.sc[i] = this.randomValidAiCar(-1, false);
+        }
+    }
+
+    private void assignForcedAiCars(int n) {
+        int carId = this.validAiCarId(this.forcedCarId) ? this.forcedCarId : this.randomValidAiCar(-1, false);
+
+        for (int i = 1; i <= n; ++i) {
+            this.sc[i] = carId;
+        }
+    }
+
+    private void assignWeightedAiCars(int n) {
+        int slot = 1;
+
+        for (int i = 0; i < this.aiWeightedCarIds.length && i < this.aiWeightedCarCounts.length && slot <= n; ++i) {
+            int carId = this.aiWeightedCarIds[i];
+            if (!this.validAiCarId(carId)) {
+                continue;
             }
-            boolean[] blArray = new boolean[7];
-            if (n < 0) {
-                n = 27;
+
+            for (int count = 0; count < this.aiWeightedCarCounts[i] && slot <= n; ++count) {
+                this.sc[slot] = carId;
+                slot++;
             }
-            int n4 = 7;
-            if (this.gmode == 1) {
-                n4 = 5;
+        }
+
+        while (slot <= n) {
+            this.sc[slot] = this.randomValidAiCar(-1, false);
+            slot++;
+        }
+    }
+
+    private void assignOriginalAiCars(int stage, int aiSlots) {
+        boolean[] used = new boolean[this.sc.length];
+        if (this.validAiCarId(this.sc[0])) {
+            used[0] = true;
+        }
+
+        int bossCar = this.stageBossCar(stage);
+        int bossSlot = this.stageBossSlot(stage, aiSlots);
+        if (bossCar != -1 && bossSlot >= 1 && bossSlot <= aiSlots && bossCar != this.sc[0]) {
+            this.sc[bossSlot] = bossCar;
+            used[bossSlot] = true;
+        }
+
+        boolean preventDuplicates = aiSlots <= this.validBaseCarCount() - 1;
+        for (int i = 1; i <= aiSlots; ++i) {
+            if (this.sc[i] != -1) {
+                continue;
             }
-            boolean bl = false;
-            if (n <= 10) {
-                n3 = 6;
-                if (this.gmode == 1) {
-                    n3 = 4;
-                }
-                if ((n == 1 || n == 2) && this.sc[0] != 5) {
-                    this.sc[n3] = 5;
-                    n4 = n3;
-                }
-                if ((n == 3 || n == 4) && this.sc[0] != 6) {
-                    this.sc[n3] = 6;
-                    n4 = n3;
-                }
-                if ((n == 5 || n == 6) && this.sc[0] != 11) {
-                    this.sc[n3] = 11;
-                    n4 = n3;
-                }
-                if ((n == 7 || n == 8) && this.sc[0] != 14) {
-                    this.sc[n3] = 14;
-                    n4 = n3;
-                }
-                if ((n == 9 || n == 10) && this.sc[0] != 15) {
-                    this.sc[n3] = 15;
-                    n4 = n3;
-                }
-            } else {
-                bl = true;
-                if (this.sc[0] != 7 + ((n -= 10) + 1) / 2 && n != 17) {
-                    this.sc[6] = 7 + (n + 1) / 2;
-                    n4 = 6;
-                }
+
+            int guard = 0;
+            do {
+                this.sc[i] = this.randomValidAiCar(stage, true);
+                guard++;
+            } while (preventDuplicates && this.carAlreadyAssigned(this.sc[i], i, aiSlots) && guard < 200);
+        }
+
+        this.applyOriginalBossPresence(stage, aiSlots);
+        this.addIncludedCustomCars(aiSlots);
+        this.fillInvalidAiCars(aiSlots);
+    }
+
+    private int stageBossCar(int stage) {
+        if (stage < 0) {
+            stage = 27;
+        }
+
+        if (stage <= 10) {
+            if (stage == 1 || stage == 2) {
+                return 5;
             }
-            n3 = 16;
-            int n5 = 1;
-            int n6 = 2;
-            for (n2 = 1; n2 < n4; ++n2) {
-                blArray[n2] = false;
-                while (!blArray[n2]) {
-                    float f;
-                    float f2 = 10.0f;
-                    if (bl) {
-                        f2 = 17.0f;
-                    }
-                    this.sc[n2] = (int)(Math.random() * (double)(24.0f + 8.0f * ((float)n / f2)));
-                    if (this.sc[n2] >= 16) {
-                        int n7 = n2;
-                        this.sc[n7] = this.sc[n7] - 16;
-                    }
-                    blArray[n2] = true;
-                    for (int i = 0; i < 7; ++i) {
-                        if (n2 == i || this.sc[n2] != this.sc[i]) continue;
-                        blArray[n2] = false;
-                    }
-                    if (bl) {
-                        f2 = 16.0f;
-                    }
-                    if ((double)(f = (float)(15 - this.sc[n2]) / 15.0f * ((float)n / f2)) > 0.8) {
-                        f = 0.8f;
-                    }
-                    if (n == 17 && (double)f > 0.5) {
-                        f = 0.5f;
-                    }
-                    if ((double)f > Math.random()) {
-                        blArray[n2] = false;
-                    }
-                    if (this.gmode == 1) {
-                        if (this.sc[n2] >= 7 && this.sc[n2] <= 10) {
-                            blArray[n2] = false;
-                        }
-                        if (this.sc[n2] == 12 || this.sc[n2] == 13) {
-                            blArray[n2] = false;
-                        }
-                        if (this.sc[n2] > 5 && this.unlocked[0] <= 2) {
-                            blArray[n2] = false;
-                        }
-                        if (this.sc[n2] > 6 && this.unlocked[0] <= 4) {
-                            blArray[n2] = false;
-                        }
-                        if (this.sc[n2] > 11 && this.unlocked[0] <= 6) {
-                            blArray[n2] = false;
-                        }
-                        if (this.sc[n2] > 14 && this.unlocked[0] <= 8) {
-                            blArray[n2] = false;
-                        }
-                    }
-                    if (this.gmode != 2) continue;
-                    if ((this.sc[n2] - 7) * 2 > this.unlocked[1]) {
-                        blArray[n2] = false;
-                    }
-                    if (n != 16 || this.unlocked[1] != 16 || this.sc[n2] >= 9) continue;
-                    blArray[n2] = false;
-                }
-                if (this.sc[n2] >= n3) continue;
-                n3 = this.sc[n2];
-                if (n5 == n2) continue;
-                n6 = n5;
-                n5 = n2;
+
+            if (stage == 3 || stage == 4) {
+                return 6;
             }
-            if (!bl && n == 10) {
-                int n8;
-                n2 = 0;
-                for (n8 = 0; n8 < 7; ++n8) {
-                    if (this.sc[n8] != 11) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n5] = 11;
-                }
-                n2 = 0;
-                for (n8 = 0; n8 < 7; ++n8) {
-                    if (this.sc[n8] != 14) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n6] = 14;
-                }
+
+            if (stage == 5 || stage == 6) {
+                return 11;
             }
-            if (n == 12) {
-                n2 = 0;
-                for (int i = 0; i < 7; ++i) {
-                    if (this.sc[i] != 11) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0) {
-                    this.sc[n5] = 11;
-                }
+
+            if (stage == 7 || stage == 8) {
+                return 14;
             }
-            if (n == 14) {
-                int n9;
-                n2 = 0;
-                for (n9 = 0; n9 < 7; ++n9) {
-                    if (this.sc[n9] != 12) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n5] = 12;
-                }
-                n2 = 0;
-                for (n9 = 0; n9 < 7; ++n9) {
-                    if (this.sc[n9] != 10) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n6] = 10;
-                }
+
+            if (stage == 9 || stage == 10) {
+                return 15;
             }
-            if (n == 15) {
-                int n10;
-                n2 = 0;
-                for (n10 = 0; n10 < 7; ++n10) {
-                    if (this.sc[n10] != 11) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n5] = 11;
-                }
-                n2 = 0;
-                for (n10 = 0; n10 < 7; ++n10) {
-                    if (this.sc[n10] != 13) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n6] = 13;
-                }
+        } else {
+            int n = stage - 10;
+            if (n != 17) {
+                return 7 + (n + 1) / 2;
             }
-            if (n == 16) {
-                int n11;
-                n2 = 0;
-                for (n11 = 0; n11 < 7; ++n11) {
-                    if (this.sc[n11] != 13) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n5] = 13;
-                }
-                n2 = 0;
-                for (n11 = 0; n11 < 7; ++n11) {
-                    if (this.sc[n11] != 12) continue;
-                    n2 = 1;
-                }
-                if (n2 == 0 && (Math.random() > Math.random() || this.gmode != 0)) {
-                    this.sc[n6] = 12;
-                }
+        }
+
+        return -1;
+    }
+
+    private int stageBossSlot(int stage, int aiSlots) {
+        int slot = stage <= 10 && this.gmode == 1 ? 4 : 6;
+        return Math.min(slot, aiSlots);
+    }
+
+    private void applyOriginalBossPresence(int stage, int aiSlots) {
+        if (stage == 10) {
+            this.ensureCarPresent(11, aiSlots);
+            this.ensureCarPresent(14, aiSlots);
+        }
+
+        if (stage == 12) {
+            this.ensureCarPresent(11, aiSlots);
+        }
+
+        if (stage == 14) {
+            this.ensureCarPresent(12, aiSlots);
+            this.ensureCarPresent(10, aiSlots);
+        }
+
+        if (stage == 15) {
+            this.ensureCarPresent(11, aiSlots);
+            this.ensureCarPresent(13, aiSlots);
+        }
+
+        if (stage == 16) {
+            this.ensureCarPresent(13, aiSlots);
+            this.ensureCarPresent(12, aiSlots);
+        }
+    }
+
+    private void ensureCarPresent(int carId, int aiSlots) {
+        if (!this.validAiCarId(carId) || this.sc[0] == carId || this.carAssigned(carId, aiSlots)) {
+            return;
+        }
+
+        this.sc[this.lowestAssignedCarSlot(aiSlots)] = carId;
+    }
+
+    private boolean carAssigned(int carId, int aiSlots) {
+        for (int i = 1; i <= aiSlots; ++i) {
+            if (this.sc[i] == carId) {
+                return true;
             }
-            if (this.cd.lastload == 1) {
-                n2 = 0;
-                for (int i = 0; i < this.cd.nlcars - 16; ++i) {
-                    int n12;
-                    if (n2 == 0) {
-                        for (n12 = 1; n12 < n4; ++n12) {
-                            blArray[n12] = false;
-                        }
-                    }
-                    if (!this.cd.include[i] || this.sc[0] == i + 16) continue;
-                    n12 = (int)(1.0 + Math.random() * (double)(n4 - 1));
-                    while (blArray[n12]) {
-                        n12 = (int)(1.0 + Math.random() * (double)(n4 - 1));
-                    }
-                    blArray[n12] = true;
-                    this.sc[n12] = i + 16;
-                    if (++n2 != n4 - 1) continue;
-                    n2 = 0;
-                }
+        }
+
+        return false;
+    }
+
+    private int lowestAssignedCarSlot(int aiSlots) {
+        int slot = 1;
+        int low = Integer.MAX_VALUE;
+
+        for (int i = 1; i <= aiSlots; ++i) {
+            if (this.sc[i] < low) {
+                low = this.sc[i];
+                slot = i;
             }
-            if (this.cd.lastload == 2) {
-                n2 = 0;
-                for (int i = 0; i < this.cd.nlocars - 16; ++i) {
-                    int n13;
-                    if (n2 == 0) {
-                        for (n13 = 1; n13 < n4; ++n13) {
-                            blArray[n13] = false;
-                        }
-                    }
-                    if (!this.cd.include[i] || this.sc[0] == i + 16) continue;
-                    n13 = (int)(1.0 + Math.random() * (double)(n4 - 1));
-                    while (blArray[n13]) {
-                        n13 = (int)(1.0 + Math.random() * (double)(n4 - 1));
-                    }
-                    blArray[n13] = true;
-                    this.sc[n13] = i + 16;
-                    if (++n2 != n4 - 1) continue;
-                    n2 = 0;
-                }
+        }
+
+        return slot;
+    }
+
+    private void addIncludedCustomCars(int aiSlots) {
+        if (this.cd.lastload != 1 && this.cd.lastload != 2) {
+            return;
+        }
+
+        int count = this.cd.lastload == 1 ? this.cd.nlcars - 16 : this.cd.nlocars - 16;
+        int nextSlot = 1;
+        for (int i = 0; i < count; ++i) {
+            int carId = i + 16;
+            if (!this.cd.include[i] || this.sc[0] == carId || !this.validAiCarId(carId)) {
+                continue;
             }
+
+            this.sc[nextSlot] = carId;
+            nextSlot++;
+            if (nextSlot > aiSlots) {
+                nextSlot = 1;
+            }
+        }
+    }
+
+    private void fillInvalidAiCars(int aiSlots) {
+        for (int i = 1; i <= aiSlots; ++i) {
+            if (!this.validAiCarId(this.sc[i])) {
+                this.sc[i] = this.randomValidAiCar(-1, false);
+            }
+        }
+    }
+
+    private boolean carAlreadyAssigned(int carId, int slot, int aiSlots) {
+        if (this.sc[0] == carId) {
+            return true;
+        }
+
+        for (int i = 1; i <= aiSlots; ++i) {
+            if (i != slot && this.sc[i] == carId) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int randomValidAiCar(int stage, boolean respectOriginalLocks) {
+        int guard = 0;
+        int carId;
+        do {
+            carId = (int)(Math.random() * this.validBaseCarCount());
+            guard++;
+        } while ((!this.validAiCarId(carId) || respectOriginalLocks && !this.originalAllowsCar(carId, stage)) && guard < 200);
+
+        if (!this.validAiCarId(carId)) {
+            carId = this.firstValidBaseCar();
+        }
+
+        return carId;
+    }
+
+    private boolean originalAllowsCar(int carId, int stage) {
+        if (this.gmode == 1) {
+            if (carId >= 7 && carId <= 10 || carId == 12 || carId == 13) {
+                return false;
+            }
+
+            if (carId > 5 && this.unlocked[0] <= 2) {
+                return false;
+            }
+
+            if (carId > 6 && this.unlocked[0] <= 4) {
+                return false;
+            }
+
+            if (carId > 11 && this.unlocked[0] <= 6) {
+                return false;
+            }
+
+            if (carId > 14 && this.unlocked[0] <= 8) {
+                return false;
+            }
+        }
+
+        if (this.gmode == 2) {
+            if ((carId - 7) * 2 > this.unlocked[1]) {
+                return false;
+            }
+
+            if (stage == 16 && this.unlocked[1] == 16 && carId < 9) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private int validBaseCarCount() {
+        return Math.min(16, this.cd.names.length);
+    }
+
+    private int firstValidBaseCar() {
+        for (int i = 0; i < this.validBaseCarCount(); ++i) {
+            if (this.validAiCarId(i)) {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    private boolean validAiCarId(int carId) {
+        return carId >= 0 && carId < this.cd.names.length && this.cd.names[carId] != null && this.cd.names[carId].length() != 0;
+    }
+
+    private void debugAiCars(String mode, int stage, int aiSlots) {
+        if (!this.debugAiCarAssignments) {
+            return;
+        }
+
+        System.out.println("[AI_CARS] mode=" + mode + ", stage=" + stage + ", nplayers=" + this.nplayers + ", aiSlots=" + aiSlots);
+        for (int i = 0; i <= aiSlots; ++i) {
+            String name = this.validAiCarId(this.sc[i]) ? this.cd.names[this.sc[i]] : "INVALID";
+            System.out.println("[AI_CARS] sc[" + i + "] = " + this.sc[i] + " (" + name + ")");
         }
     }
 
