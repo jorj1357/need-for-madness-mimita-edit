@@ -625,7 +625,9 @@ public class CarDefine implements Runnable {
       1.0F,
 
       // Lead Oxide
-      10.0F,
+      // 10.0F,
+      // 999.0F,
+      9999999.0F,
       // chill bro idk  what makes it so i touch  the car adn i die instant but idkrinag 6 3 2026
       // 2.0F,
       // 1.0F,
@@ -1172,6 +1174,8 @@ public class CarDefine implements Runnable {
       // lead oxide
       // set to 0 for god mode heheheheheh 6 3 2026
       // 0.72F,
+      // godmode is boring 6 3 2026
+      // 0.25F,
       // ok 0 is boring just put super small
       // 0.0F,
       0.01F,
