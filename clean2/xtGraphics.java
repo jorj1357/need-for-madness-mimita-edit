@@ -24,6 +24,16 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class xtGraphics extends Panel implements Runnable {
+   static final int STAGE_LOAD_FAILED = -3;
+   static final int STAGE_MY_STAGE = -2;
+   static final int STAGE_MAKER_STAGE = -1;
+   static final int STAGE_NFM1_FIRST = 1;
+   static final int STAGE_NFM1_LAST = 10;
+   static final int STAGE_NFM2_FIRST = 11;
+   static final int STAGE_NFM2_LAST = 26;
+   static final int STAGE_FINAL_PARTY = 27;
+   static final int BUILTIN_STAGE_COUNT = 27;
+   static final int STOCK_CAR_COUNT = 16;
    Graphics2D rd;
    Medium m;
    CarDefine cd;
@@ -82,8 +92,12 @@ public class xtGraphics extends Panel implements Runnable {
    int minsl = 0;
    int maxsl = 15;
    int[] sc = new int[Madness.playerSlots()];
+   //    aiCarMode = 0: original-style stage/boss behavior, now scalable.
+   // aiCarMode = 1: fully random AI cars.
+   // aiCarMode = 2: force every AI to forcedCarId.
+   // aiCarMode = 3: weighted/custom distribution.
    int aiCarMode = 0;
-   int forcedCarId = 13;
+   int forcedCarId = 13; // this is masheen hehehe 
    int[] aiWeightedCarIds = new int[]{13, 11, 14};
    int[] aiWeightedCarCounts = new int[]{8, 8, 8};
    boolean debugAiCarAssignments = true;
@@ -449,19 +463,22 @@ public class xtGraphics extends Panel implements Runnable {
             int var7 = var5 % var8;
             int var12 = Math.min(var8, var1 - var6 * var8);
             int var13 = var7 - (var12 - 1) / 2;
-            this.xstart[var5] = var13 * var10;
+            long var15 = (long)var13 * var10;
             if (var12 % 2 == 0) {
-               this.xstart[var5] += var10 / 2;
+               var15 += var10 / 2;
             }
 
             if (var6 % 2 == 1) {
-               this.xstart[var5] += var10 / 4;
+               var15 += var10 / 4;
             }
 
-            this.zstart[var5] = (var6 - (var9 - 1) / 2) * var11;
+            long var17 = (long)(var6 - (var9 - 1) / 2) * var11;
             if (var9 % 2 == 0) {
-               this.zstart[var5] += var11 / 2;
+               var17 += var11 / 2;
             }
+
+            this.xstart[var5] = this.safeIntCoordinate(var15);
+            this.zstart[var5] = this.safeIntCoordinate(var17);
          }
       }
 
@@ -469,6 +486,121 @@ public class xtGraphics extends Panel implements Runnable {
       for (int var14 = 0; var14 < this.nplayers; var14++) {
          System.out.println("[MAX_PLAYERS] spawn[" + var14 + "] x=" + this.xstart[var14] + ", z=" + this.zstart[var14]);
       }
+   }
+
+   private int randomBuiltinStage() {
+      return 1 + (int)(Math.random() * BUILTIN_STAGE_COUNT);
+   }
+
+   private int randomNfm1Stage() {
+      return STAGE_NFM1_FIRST + (int)(Math.random() * (STAGE_NFM1_LAST - STAGE_NFM1_FIRST + 1));
+   }
+
+   private int randomNfm2Stage() {
+      return STAGE_NFM2_FIRST + (int)(Math.random() * (STAGE_NFM2_LAST - STAGE_NFM2_FIRST + 1));
+   }
+
+   private boolean isBuiltinStage(int var1) {
+      return var1 >= STAGE_NFM1_FIRST && var1 <= STAGE_FINAL_PARTY;
+   }
+
+   private boolean isSpecialStage(int var1) {
+      return var1 == STAGE_MY_STAGE || var1 == STAGE_MAKER_STAGE || var1 == STAGE_LOAD_FAILED;
+   }
+
+   private int normalizeStageForCurrentMode(int var1) {
+      if (this.isSpecialStage(var1)) {
+         return var1;
+      }
+
+      if (!this.isBuiltinStage(var1)) {
+         System.out.println("[STAGE_NAV] invalid stage " + var1 + "; using random built-in stage");
+         var1 = this.randomBuiltinStage();
+      }
+
+      if (this.gmode == 1 && var1 > STAGE_NFM1_LAST && var1 != STAGE_FINAL_PARTY) {
+         return STAGE_NFM1_LAST;
+      }
+
+      if (this.gmode == 2 && var1 < STAGE_NFM2_FIRST) {
+         return STAGE_NFM2_FIRST;
+      }
+
+      return var1;
+   }
+
+   private void setStage(CheckPoints var1, int var2, String var3) {
+      int var4 = var1.stage;
+      var1.stage = this.normalizeStageForCurrentMode(var2);
+      if (var4 != var1.stage) {
+         System.out.println("[STAGE_NAV] " + var3 + ": " + var4 + " -> " + var1.stage + ", gmode=" + this.gmode + ", nfmtab=" + this.nfmtab);
+      }
+   }
+
+   private int nextStage(int var1) {
+      var1 = this.normalizeStageForCurrentMode(var1);
+      if (!this.isBuiltinStage(var1)) {
+         return var1;
+      }
+
+      if (this.gmode == 1) {
+         return var1 >= STAGE_NFM1_LAST ? STAGE_FINAL_PARTY : var1 + 1;
+      }
+
+      if (this.gmode == 2) {
+         return var1 >= STAGE_NFM2_LAST ? STAGE_FINAL_PARTY : Math.max(STAGE_NFM2_FIRST, var1 + 1);
+      }
+
+      return var1 >= STAGE_FINAL_PARTY ? STAGE_NFM1_FIRST : var1 + 1;
+   }
+
+   private int previousStage(int var1) {
+      var1 = this.normalizeStageForCurrentMode(var1);
+      if (!this.isBuiltinStage(var1)) {
+         return var1;
+      }
+
+      if (this.gmode == 1) {
+         if (var1 == STAGE_FINAL_PARTY) {
+            return STAGE_NFM1_LAST;
+         }
+
+         return var1 <= STAGE_NFM1_FIRST ? STAGE_NFM1_LAST : var1 - 1;
+      }
+
+      if (this.gmode == 2) {
+         if (var1 == STAGE_FINAL_PARTY) {
+            return STAGE_NFM2_LAST;
+         }
+
+         return var1 <= STAGE_NFM2_FIRST ? STAGE_NFM2_LAST : var1 - 1;
+      }
+
+      return var1 <= STAGE_NFM1_FIRST ? STAGE_FINAL_PARTY : var1 - 1;
+   }
+
+   private void syncStageTab(CheckPoints var1) {
+      if (var1.stage > STAGE_NFM1_LAST) {
+         this.app.sgame.select(1);
+         this.nfmtab = 1;
+      } else if (var1.stage > 0) {
+         this.app.sgame.select(0);
+         this.nfmtab = 0;
+      }
+   }
+
+   private int safeIntCoordinate(long var1) {
+      if (var1 > Integer.MAX_VALUE) {
+         System.out.println("[MAX_PLAYERS] WARNING spawn coordinate overflow " + var1 + "; clamping to " + Integer.MAX_VALUE);
+         return Integer.MAX_VALUE;
+      }
+
+      if (var1 < Integer.MIN_VALUE) {
+         System.out.println("[MAX_PLAYERS] WARNING spawn coordinate underflow " + var1 + "; clamping to " + Integer.MIN_VALUE);
+         return Integer.MIN_VALUE;
+      }
+
+      return (int)var1;
    }
 
    public xtGraphics(Medium var1, CarDefine var2, Graphics2D var3, GameSparker var4) {
@@ -2006,16 +2138,17 @@ public class xtGraphics extends Panel implements Runnable {
    }
 
    public void inishstageselect(CheckPoints var1) {
-      if (var1.stage == -2 && (this.cd.msloaded != 1 || !this.logged)) {
-         var1.stage = (int)(Math.random() * 27.0) + 1;
+      this.setStage(var1, var1.stage, "inish-start");
+      if (var1.stage == STAGE_MY_STAGE && (this.cd.msloaded != 1 || !this.logged)) {
+         this.setStage(var1, this.randomBuiltinStage(), "missing-my-stage-list");
          var1.top20 = 0;
       }
 
-      if (var1.stage > 27) {
-         var1.stage = (int)(Math.random() * 27.0) + 1;
+      if (var1.stage > STAGE_FINAL_PARTY) {
+         this.setStage(var1, this.randomBuiltinStage(), "stage-above-builtins");
       }
 
-      if (var1.stage == -2) {
+      if (var1.stage == STAGE_MY_STAGE) {
          boolean var2 = false;
 
          for (int var3 = 1; var3 < this.app.mstgs.getItemCount(); var3++) {
@@ -2025,27 +2158,27 @@ public class xtGraphics extends Panel implements Runnable {
          }
 
          if (!var2) {
-            var1.stage = (int)(Math.random() * 27.0) + 1;
+            this.setStage(var1, this.randomBuiltinStage(), "missing-my-stage-name");
          }
       }
 
       if (this.gmode == 1) {
          if (this.unlocked[0] != 11 || this.justwon1) {
-            var1.stage = this.unlocked[0];
+            this.setStage(var1, this.unlocked[0], "nfm1-unlocked");
          } else if (this.winner || var1.stage > 11) {
-            var1.stage = (int)(Math.random() * 11.0) + 1;
+            this.setStage(var1, this.randomNfm1Stage(), "nfm1-random");
          }
 
          if (var1.stage == 11) {
-            var1.stage = 27;
+            this.setStage(var1, STAGE_FINAL_PARTY, "nfm1-final-party");
          }
       }
 
       if (this.gmode == 2) {
          if (this.unlocked[0] != 17 || this.justwon2) {
-            var1.stage = this.unlocked[1] + 10;
+            this.setStage(var1, this.unlocked[1] + 10, "nfm2-unlocked");
          } else if (this.winner || var1.stage < 11) {
-            var1.stage = (int)(Math.random() * 17.0) + 11;
+            this.setStage(var1, this.randomNfm2Stage(), "nfm2-random");
          }
       }
 
@@ -2076,12 +2209,12 @@ public class xtGraphics extends Panel implements Runnable {
          this.nfmtab = 1;
       }
 
-      if (var1.stage == -2) {
+      if (var1.stage == STAGE_MY_STAGE) {
          this.app.sgame.select(2);
          this.nfmtab = 2;
       }
 
-      if (var1.stage == -1) {
+      if (var1.stage == STAGE_MAKER_STAGE) {
          this.app.sgame.select(5);
          this.nfmtab = 5;
       }
@@ -2216,7 +2349,7 @@ public class xtGraphics extends Panel implements Runnable {
             }
 
             if (this.nfmtab == 2 && this.cd.staction == 0 && this.removeds == 1) {
-               var1.stage = -3;
+               this.setStage(var1, STAGE_LOAD_FAILED, "removed-my-stage");
             }
 
             if (this.app.openm && this.cd.staction == 3) {
@@ -2314,7 +2447,7 @@ public class xtGraphics extends Panel implements Runnable {
                if (!this.app.snfm1.isShowing()) {
                   this.app.snfm1.show();
                   if (!var12 && var1.stage > 0) {
-                     this.app.snfm1.select(var1.stage);
+                     this.app.snfm1.select(Math.max(0, Math.min(var1.stage, this.app.snfm1.getItemCount() - 1)));
                   }
                }
 
@@ -2332,7 +2465,7 @@ public class xtGraphics extends Panel implements Runnable {
                if (!this.app.snfm2.isShowing()) {
                   this.app.snfm2.show();
                   if (!var12 && var1.stage > 10) {
-                     this.app.snfm2.select(var1.stage - 10);
+                     this.app.snfm2.select(Math.max(0, Math.min(var1.stage - 10, this.app.snfm2.getItemCount() - 1)));
                   }
                }
 
@@ -2419,11 +2552,11 @@ public class xtGraphics extends Panel implements Runnable {
                      }
 
                      if (this.nfmtab == 0) {
-                        this.app.snfm1.select(1 + (int)(Math.random() * 10.0));
+                     this.app.snfm1.select(this.randomNfm1Stage());
                      }
 
                      if (this.nfmtab == 1) {
-                        this.app.snfm2.select(1 + (int)(Math.random() * 17.0));
+                     this.app.snfm2.select(this.randomNfm2Stage() - 10);
                      }
                   }
                }
@@ -2703,7 +2836,7 @@ public class xtGraphics extends Panel implements Runnable {
             }
 
             if (this.nfmtab == 0 && this.app.snfm1.getSelectedIndex() != var1.stage && this.app.snfm1.getSelectedIndex() != 0) {
-               var1.stage = this.app.snfm1.getSelectedIndex();
+               this.setStage(var1, this.app.snfm1.getSelectedIndex(), "snfm1-select");
                var1.top20 = 0;
                var1.nto = 0;
                this.hidos();
@@ -2712,7 +2845,7 @@ public class xtGraphics extends Panel implements Runnable {
             }
 
             if (this.nfmtab == 1 && this.app.snfm2.getSelectedIndex() != var1.stage - 10 && this.app.snfm2.getSelectedIndex() != 0) {
-               var1.stage = this.app.snfm2.getSelectedIndex() + 10;
+               this.setStage(var1, this.app.snfm2.getSelectedIndex() + 10, "snfm2-select");
                var1.top20 = 0;
                var1.nto = 0;
                this.hidos();
@@ -2722,9 +2855,9 @@ public class xtGraphics extends Panel implements Runnable {
 
             if ((this.nfmtab == 2 || this.nfmtab == 5) && !this.app.mstgs.getSelectedItem().equals(var1.name) && this.app.mstgs.getSelectedIndex() != 0) {
                if (this.nfmtab == 2) {
-                  var1.stage = -2;
+                  this.setStage(var1, STAGE_MY_STAGE, "my-stage-select");
                } else {
-                  var1.stage = -1;
+                  this.setStage(var1, STAGE_MAKER_STAGE, "maker-stage-select");
                }
 
                var1.name = this.app.mstgs.getSelectedItem();
@@ -2743,7 +2876,7 @@ public class xtGraphics extends Panel implements Runnable {
                }
 
                if (!var14.equals("") && !var14.equals(var1.name) && this.app.mstgs.getSelectedIndex() != 0) {
-                  var1.stage = -2;
+                  this.setStage(var1, STAGE_MY_STAGE, "top-stage-select");
                   var1.name = var14;
                   var1.top20 = -this.cd.msloaded;
                   var1.nto = this.app.mstgs.getSelectedIndex();
@@ -2801,20 +2934,10 @@ public class xtGraphics extends Panel implements Runnable {
                      && var1.stage != 27) {
                      this.fase = 4;
                      this.lockcnt = 100;
-                  } else if (var1.stage != 27) {
+                  } else if (var1.stage != STAGE_FINAL_PARTY) {
                      this.hidos();
-                     var1.stage++;
-                     if (this.gmode == 1 && var1.stage == 11) {
-                        var1.stage = 27;
-                     }
-
-                     if (var1.stage > 10) {
-                        this.app.sgame.select(1);
-                        this.nfmtab = 1;
-                     } else {
-                        this.app.sgame.select(0);
-                        this.nfmtab = 0;
-                     }
+                     this.setStage(var1, this.nextStage(var1.stage), "right-arrow");
+                     this.syncStageTab(var1);
 
                      this.fase = 2;
                   }
@@ -2822,20 +2945,10 @@ public class xtGraphics extends Panel implements Runnable {
                   var2.right = false;
                }
 
-               if (var2.left && var1.stage != 1 && (var1.stage != 11 || this.gmode != 2)) {
+               if (var2.left && this.isBuiltinStage(var1.stage)) {
                   this.hidos();
-                  var1.stage--;
-                  if (this.gmode == 1 && var1.stage == 26) {
-                     var1.stage = 10;
-                  }
-
-                  if (var1.stage > 10) {
-                     this.app.sgame.select(1);
-                     this.nfmtab = 1;
-                  } else {
-                     this.app.sgame.select(0);
-                     this.nfmtab = 0;
-                  }
+                  this.setStage(var1, this.previousStage(var1.stage), "left-arrow");
+                  this.syncStageTab(var1);
 
                   this.fase = 2;
                   var2.left = false;
@@ -7342,8 +7455,8 @@ public class xtGraphics extends Panel implements Runnable {
                         this.justwon2 = false;
                     }
                 }
-                if (checkPoints.stage == 27 && this.gmode == 0) {
-                    checkPoints.stage = (int)(Math.random() * 27.0) + 1;
+                if (checkPoints.stage == STAGE_FINAL_PARTY && this.gmode == 0) {
+                    this.setStage(checkPoints, this.randomBuiltinStage(), "finish-random-after-final");
                 }
                 this.fase = 102;
             } else if (this.cd.haltload == 1) {
@@ -7355,8 +7468,8 @@ public class xtGraphics extends Panel implements Runnable {
             } else {
                 this.fase = -9;
             }
-            if (this.multion == 0 && this.winner && checkPoints.stage != 27 && checkPoints.stage > 0) {
-                ++checkPoints.stage;
+            if (this.multion == 0 && this.winner && checkPoints.stage != STAGE_FINAL_PARTY && checkPoints.stage > 0) {
+                this.setStage(checkPoints, this.nextStage(checkPoints.stage), "finish-next-stage");
             }
             if (!(this.winner || this.multion == 0 || this.forstart != 700 && this.discon != 240 || this.ndisco >= 5)) {
                 ++this.ndisco;
@@ -7466,7 +7579,7 @@ public class xtGraphics extends Panel implements Runnable {
             do {
                 this.sc[i] = this.randomValidAiCar(stage, true);
                 guard++;
-            } while (preventDuplicates && this.carAlreadyAssigned(this.sc[i], i, aiSlots) && guard < 200);
+            } while (preventDuplicates && this.carAlreadyAssigned(this.sc[i], i, aiSlots) && guard < this.assignmentAttemptLimit());
         }
 
         this.applyOriginalBossPresence(stage, aiSlots);
@@ -7577,10 +7690,10 @@ public class xtGraphics extends Panel implements Runnable {
             return;
         }
 
-        int count = this.cd.lastload == 1 ? this.cd.nlcars - 16 : this.cd.nlocars - 16;
+        int count = this.cd.lastload == 1 ? this.cd.nlcars - STOCK_CAR_COUNT : this.cd.nlocars - STOCK_CAR_COUNT;
         int nextSlot = 1;
         for (int i = 0; i < count; ++i) {
-            int carId = i + 16;
+            int carId = i + STOCK_CAR_COUNT;
             if (!this.cd.include[i] || this.sc[0] == carId || !this.validAiCarId(carId)) {
                 continue;
             }
@@ -7621,7 +7734,7 @@ public class xtGraphics extends Panel implements Runnable {
         do {
             carId = (int)(Math.random() * this.validBaseCarCount());
             guard++;
-        } while ((!this.validAiCarId(carId) || respectOriginalLocks && !this.originalAllowsCar(carId, stage)) && guard < 200);
+        } while ((!this.validAiCarId(carId) || respectOriginalLocks && !this.originalAllowsCar(carId, stage)) && guard < this.assignmentAttemptLimit());
 
         if (!this.validAiCarId(carId)) {
             carId = this.firstValidBaseCar();
@@ -7667,7 +7780,11 @@ public class xtGraphics extends Panel implements Runnable {
     }
 
     private int validBaseCarCount() {
-        return Math.min(16, this.cd.names.length);
+        return Math.min(STOCK_CAR_COUNT, this.cd.names.length);
+    }
+
+    private int assignmentAttemptLimit() {
+        return Math.max(32, this.validBaseCarCount() * Math.max(2, this.validBaseCarCount()));
     }
 
     private int firstValidBaseCar() {
@@ -11414,5 +11531,3 @@ public class xtGraphics extends Panel implements Runnable {
       return var3;
    }
 }
-
-

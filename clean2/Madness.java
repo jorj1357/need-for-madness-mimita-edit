@@ -40,12 +40,10 @@ public class Madness extends Panel {
    static int endadv = 0;
    static long advtime = 0L;
    static int autotestMode = 0;
-   // public static final int MAX_PLAYERS = 30;
    public static final int MAX_PLAYERS = 99;
-   // public static final int MAX_PLAYERS = 999;
-   // public static final int SAFE_MAX_PLAYERS = 30;
-   public static final int SAFE_MAX_PLAYERS = 999;
-   // public static final int SAFE_MAX_PLAYERS = 9999;
+   public static final int MAX_SAFE_PLAYERS = 999999999;
+   public static final int MAX_SAFE_STAGES = 999999999;
+   public static final int SAFE_MAX_PLAYERS = MAX_SAFE_PLAYERS;
    static boolean loggedMaxPlayers = false;
 
    public static int maxPlayers() {
@@ -679,7 +677,6 @@ public class Madness extends Panel {
       return var3;
    }
 }
-
 
 
 

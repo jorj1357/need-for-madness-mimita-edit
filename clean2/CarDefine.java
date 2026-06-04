@@ -564,6 +564,7 @@ public class CarDefine implements Runnable {
       // idk waht it does but  its cool 6 3 2026
       // 1.7F,
       // this is momentummmmmm 6 3 2026 momentum big 
+      99.9F,
       // 9.9F,
       1.48F,
       1.35F,
@@ -626,8 +627,8 @@ public class CarDefine implements Runnable {
 
       // Lead Oxide
       // 10.0F,
-      // 999.0F,
-      9999999.0F,
+      999.0F,
+      // 9999999.0F,
       // chill bro idk  what makes it so i touch  the car adn i die instant but idkrinag 6 3 2026
       // 2.0F,
       // 1.0F,
