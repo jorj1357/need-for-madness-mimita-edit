@@ -625,7 +625,9 @@ public class CarDefine implements Runnable {
       1.0F,
 
       // Lead Oxide
-      10.0F,
+      // 10.0F,
+      // chill bro idk  what makes it so i touch  the car adn i die instant but idkrinag 6 3 2026
+      2.0F,
 
       1.0F,
       1.0F,
