@@ -144,7 +144,9 @@ public class GameSparker extends Applet implements Runnable {
       UDPMistro var11 = new UDPMistro();
       Record var12 = new Record(var1);
       this.loadbase(var4, var1, var2, var6, false);
-      ContO[] var13 = new ContO[610];
+      // ContO[] var13 = new ContO[610];
+      // better 6 3 2026 
+      ContO[] var13 = new ContO[Math.max(610, Madness.playerSlots() + 1000)];
       Mad[] var14 = new Mad[Madness.playerSlots()];
 
       for (int var15 = 0; var15 < Madness.playerSlots(); var15++) {
@@ -946,7 +948,8 @@ public class GameSparker extends Applet implements Runnable {
 
             var1.d(this.rd);
             int var47 = 0;
-            int[] var59 = new int[200];
+            // int[] var59 = new int[200];
+            int[] var59 = new int[Math.max(200, this.nob + Madness.playerSlots() + 1000)];
 
             for (int var69 = 0; var69 < this.nob; var69++) {
                if (var13[var69].dist != 0) {
@@ -1099,7 +1102,9 @@ public class GameSparker extends Applet implements Runnable {
 
             var1.d(this.rd);
             int var49 = 0;
-            int[] var61 = new int[200];
+            // int[] var61 = new int[200];
+            // aaaa 6 3 2026 
+            int[] var61 = new int[Math.max(200, this.nob + Madness.playerSlots() + 1000)];
 
             for (int var72 = 0; var72 < this.nob; var72++) {
                if (var13[var72].dist != 0) {
@@ -1343,7 +1348,8 @@ public class GameSparker extends Applet implements Runnable {
 
             var1.d(this.rd);
             int var51 = 0;
-            int[] var62 = new int[200];
+            // int[] var62 = new int[200];
+            int[] var62 = new int[Math.max(200, this.nob + Madness.playerSlots() + 1000)];
 
             for (int var74 = 0; var74 < this.nob; var74++) {
                if (var13[var74].dist != 0) {
@@ -1495,7 +1501,8 @@ public class GameSparker extends Applet implements Runnable {
 
             var1.d(this.rd);
             int var53 = 0;
-            int[] var63 = new int[200];
+            // int[] var63 = new int[200];
+            int[] var63 = new int[Math.max(200, this.nob + Madness.playerSlots() + 1000)];
 
             for (int var76 = 0; var76 < this.nob; var76++) {
                if (var13[var76].dist != 0) {
