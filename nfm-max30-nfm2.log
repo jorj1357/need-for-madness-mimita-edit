@@ -1,0 +1,893 @@
+[MAX_PLAYERS] startup context=main, configured=30, effective=30
+LOADDATA START
+LOADDATA images sss
+LOADDATA interfacece
+LOADSOUNDS START
+LOADSOUNDS try sounds
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADSOUNDS vfirewasted etc
+LOADDATA sounds lo sounds
+[AUTOTEST] starting NFM2 at car-select transition
+[STATE] fase=-2147483648 -> -9, stage=-2147483648 -> 13, gmode=2, multion=0, nplayers=30, loadedt=false
+[MAX_PLAYERS] actual spawned car count=30
+[MAX_PLAYERS] spawn[0] x=-1050, z=-1040
+[MAX_PLAYERS] spawn[1] x=-350, z=-1040
+[MAX_PLAYERS] spawn[2] x=350, z=-1040
+[MAX_PLAYERS] spawn[3] x=1050, z=-1040
+[MAX_PLAYERS] spawn[4] x=1750, z=-1040
+[MAX_PLAYERS] spawn[5] x=2450, z=-1040
+[MAX_PLAYERS] spawn[6] x=-875, z=-520
+[MAX_PLAYERS] spawn[7] x=-175, z=-520
+[MAX_PLAYERS] spawn[8] x=525, z=-520
+[MAX_PLAYERS] spawn[9] x=1225, z=-520
+[MAX_PLAYERS] spawn[10] x=1925, z=-520
+[MAX_PLAYERS] spawn[11] x=2625, z=-520
+[MAX_PLAYERS] spawn[12] x=-1050, z=0
+[MAX_PLAYERS] spawn[13] x=-350, z=0
+[MAX_PLAYERS] spawn[14] x=350, z=0
+[MAX_PLAYERS] spawn[15] x=1050, z=0
+[MAX_PLAYERS] spawn[16] x=1750, z=0
+[MAX_PLAYERS] spawn[17] x=2450, z=0
+[MAX_PLAYERS] spawn[18] x=-875, z=520
+[MAX_PLAYERS] spawn[19] x=-175, z=520
+[MAX_PLAYERS] spawn[20] x=525, z=520
+[MAX_PLAYERS] spawn[21] x=1225, z=520
+[MAX_PLAYERS] spawn[22] x=1925, z=520
+[MAX_PLAYERS] spawn[23] x=2625, z=520
+[MAX_PLAYERS] spawn[24] x=-1050, z=1040
+[MAX_PLAYERS] spawn[25] x=-350, z=1040
+[MAX_PLAYERS] spawn[26] x=350, z=1040
+[MAX_PLAYERS] spawn[27] x=1050, z=1040
+[MAX_PLAYERS] spawn[28] x=1750, z=1040
+[MAX_PLAYERS] spawn[29] x=2450, z=1040
+[AUTOTEST] selected Lead Oxide for verification
+[STATE] fase=-9 -> 7, stage=13 -> 13, gmode=2, multion=0, nplayers=30, loadedt=false
+[LOADSTAGE] start fase=2, stage=27, name=hogan rewish, gmode=2, multion=0, cwd=C:\important\go-away-v6\need-for-madness-mimita\.
+[MAX_PLAYERS] actual spawned car count=30
+[MAX_PLAYERS] spawn[0] x=-1050, z=-1040
+[MAX_PLAYERS] spawn[1] x=-350, z=-1040
+[MAX_PLAYERS] spawn[2] x=350, z=-1040
+[MAX_PLAYERS] spawn[3] x=1050, z=-1040
+[MAX_PLAYERS] spawn[4] x=1750, z=-1040
+[MAX_PLAYERS] spawn[5] x=2450, z=-1040
+[MAX_PLAYERS] spawn[6] x=-875, z=-520
+[MAX_PLAYERS] spawn[7] x=-175, z=-520
+[MAX_PLAYERS] spawn[8] x=525, z=-520
+[MAX_PLAYERS] spawn[9] x=1225, z=-520
+[MAX_PLAYERS] spawn[10] x=1925, z=-520
+[MAX_PLAYERS] spawn[11] x=2625, z=-520
+[MAX_PLAYERS] spawn[12] x=-1050, z=0
+[MAX_PLAYERS] spawn[13] x=-350, z=0
+[MAX_PLAYERS] spawn[14] x=350, z=0
+[MAX_PLAYERS] spawn[15] x=1050, z=0
+[MAX_PLAYERS] spawn[16] x=1750, z=0
+[MAX_PLAYERS] spawn[17] x=2450, z=0
+[MAX_PLAYERS] spawn[18] x=-875, z=520
+[MAX_PLAYERS] spawn[19] x=-175, z=520
+[MAX_PLAYERS] spawn[20] x=525, z=520
+[MAX_PLAYERS] spawn[21] x=1225, z=520
+[MAX_PLAYERS] spawn[22] x=1925, z=520
+[MAX_PLAYERS] spawn[23] x=2625, z=520
+[MAX_PLAYERS] spawn[24] x=-1050, z=1040
+[MAX_PLAYERS] spawn[25] x=-350, z=1040
+[MAX_PLAYERS] spawn[26] x=350, z=1040
+[MAX_PLAYERS] spawn[27] x=1050, z=1040
+[MAX_PLAYERS] spawn[28] x=1750, z=1040
+[MAX_PLAYERS] spawn[29] x=2450, z=1040
+[LOADSTAGE] end fase=1, stage=27, checkpoints=2, objects=139, trackers=316, trackname=, trackvol=200
+[STATE] fase=7 -> 1, stage=13 -> 27, gmode=2, multion=0, nplayers=30, loadedt=false
+[STATE] fase=1 -> 5, stage=27 -> 27, gmode=2, multion=0, nplayers=30, loadedt=false
+[LOADMUSIC] start stage=27, trackname=, trackvol=200, loadedt=false
+[LOADSTRACK] stage=27, trackname=, trackvol=200
+[LOADMUSIC] end stage=27, fase=6, loadedt=true, strack=true
+[STATE] fase=5 -> 6, stage=27 -> 27, gmode=2, multion=0, nplayers=30, loadedt=true
+[STATE] fase=6 -> 0, stage=27 -> 27, gmode=2, multion=0, nplayers=30, loadedt=true
+[STATE] fase=0 -> -7, stage=27 -> 27, gmode=2, multion=0, nplayers=30, loadedt=true
+[STATE] fase=-7 -> 0, stage=27 -> 27, gmode=2, multion=0, nplayers=30, loadedt=true
+[AUTOTEST] pressing accelerator in gameplay
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=6, im=0
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=8, im=1
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=3, im=2
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=2, im=3
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=4, im=4
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=13, im=5
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=11, im=6
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=7
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=8
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=9
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=10
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=11
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=12
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=13
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=14
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=15
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=16
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=17
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=18
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=19
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=20
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=21
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=22
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=23
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=24
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=25
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=26
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=27
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=28
+[SUPER_AIR] loop -2147483648 -> 0 at drive-start, cn=0, im=29
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=8, im=1
+[SUPER_AIR] wtouch false -> true at drive-start, cn=8, im=1
+[SUPER_AIR] mtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=4, im=4
+[SUPER_AIR] wtouch false -> true at drive-start, cn=4, im=4
+[SUPER_AIR] mtouch false -> true at drive-start, cn=13, im=5
+[SUPER_AIR] wtouch false -> true at drive-start, cn=13, im=5
+[SUPER_AIR] mtouch false -> true at drive-start, cn=11, im=6
+[SUPER_AIR] wtouch false -> true at drive-start, cn=11, im=6
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=12
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=12
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=13
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=21
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=21
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=27
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=27
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=29
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=29
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch true -> false at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch true -> false at drive-start, cn=3, im=2
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=20
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=11
+[SUPER_AIR] wtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=46, lastMs=31
+[SUPER_AIR] mtouch true -> false at drive-start, cn=13, im=5
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=29
+[SUPER_AIR] wtouch true -> false at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=21
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=29
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=21
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=21
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch false -> true at drive-start, cn=13, im=5
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] mtouch true -> false at drive-start, cn=4, im=4
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=21
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=4, im=4
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] SPACE enabled cn=0, im=26, loop=0, y=-53
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=26
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=25
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=25
+[SUPER_AIR] SPACE enabled cn=0, im=25, loop=0, y=-60
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=25
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=25
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=15
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=18
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=18
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=18
+[SUPER_AIR] SPACE enabled cn=0, im=18, loop=0, y=-55
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=18
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=18
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] SPACE enabled cn=0, im=14, loop=0, y=-61
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=14
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=15
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] SPACE enabled cn=2, im=3, loop=0, y=-98
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=0.95, airc=40
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=2, im=3
+[SUPER_AIR] superAir false -> true at post-space, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] mtouch true -> false at drive-start, cn=11, im=6
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=12
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=12
+[SUPER_AIR] mtouch true -> false at drive-start, cn=3, im=2
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=12
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=12
+[SUPER_AIR] wtouch true -> false at drive-start, cn=11, im=6
+[SUPER_AIR] wtouch true -> false at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=25
+[SUPER_AIR] wtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=25
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] SPACE activation loop=-1 -> 1, superAir=true
+[SUPER_AIR] loop -1 -> 2 at post-space, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=18
+[SUPER_AIR] mtouch false -> true at drive-start, cn=3, im=2
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=18
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=25
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] disabled on landing cn=0, im=14
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=14
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=14
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] disabled on landing cn=0, im=25
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=25
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=25
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=11, im=6
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch true -> false at drive-start, cn=11, im=6
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] SPACE enabled cn=0, im=16, loop=0, y=-62
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=16
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=11, im=6
+[SUPER_AIR] wtouch false -> true at drive-start, cn=11, im=6
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=18
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=20
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=18
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=21
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=27
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=20
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] disabled on landing cn=2, im=3
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=2, im=3
+[SUPER_AIR] superAir true -> false at post-space, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=27
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=18
+[SUPER_AIR] disabled on landing cn=0, im=18
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=18
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=18
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=21
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=28
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=16
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] SPACE activation loop=-1 -> 1, superAir=true
+[SUPER_AIR] loop -1 -> 2 at post-space, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=9
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=29
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=29
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=14
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=45, lastMs=47
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=9
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=11, im=6
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=11, im=6
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=29
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=29
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=26
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] disabled on landing cn=0, im=16
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=16
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=16
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=29
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=29
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=25
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=25
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=29
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=15
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=29
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=25
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] SPACE enabled cn=0, im=10, loop=0, y=-59
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=10
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=10
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=7
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=15
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=9
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=22
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] disabled on landing cn=0, im=26
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=26
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=10
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=27
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=27
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=9
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=27
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] disabled on landing cn=0, im=10
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=10
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=10
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=27
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=9
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=27
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=13, im=5
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch true -> false at drive-start, cn=13, im=5
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=27
+[SUPER_AIR] wtouch false -> true at drive-start, cn=13, im=5
+[SUPER_AIR] mtouch false -> true at drive-start, cn=13, im=5
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=48, lastMs=47
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=16
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=13
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=13
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=16
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=11
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=4, im=4
+[SUPER_AIR] mtouch false -> true at drive-start, cn=4, im=4
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=11
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=11
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=48, lastMs=46
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=13
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=13
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] SPACE enabled cn=0, im=8, loop=0, y=-42
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=8
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] SPACE enabled cn=6, im=0, loop=0, y=-91
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=0.9, airc=40
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=6, im=0
+[SUPER_AIR] superAir false -> true at post-space, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=8
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=8
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=48, lastMs=46
+[SUPER_AIR] wtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=8
+[SUPER_AIR] wtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] disabled on landing cn=6, im=0
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=6, im=0
+[SUPER_AIR] superAir true -> false at post-space, cn=6, im=0
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=8
+[SUPER_AIR] disabled on landing cn=0, im=8
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=8
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=8
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=17
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=24
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=24
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] SPACE enabled cn=0, im=26, loop=0, y=-53
+[SUPER_AIR] SPACE activation loop=0 -> 1, superAir=true
+[SUPER_AIR] effective multipliers rot=1.22, build=1.22, airs=1.0, airc=70
+[SUPER_AIR] loop 0 -> 2 at post-space, cn=0, im=26
+[SUPER_AIR] superAir false -> true at post-space, cn=0, im=26
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=47, lastMs=45
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] loop 2 -> -1 at post-space, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=4, im=4
+[SUPER_AIR] mtouch false -> true at drive-start, cn=4, im=4
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=23
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=23
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=26
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=26
+[SUPER_AIR] disabled on landing cn=0, im=26
+[SUPER_AIR] loop -1 -> 0 at post-space, cn=0, im=26
+[SUPER_AIR] superAir true -> false at post-space, cn=0, im=26
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=48, lastMs=62
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=14
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[MAX_PLAYERS] frame timing nplayers=30, fase=0, avgMs=48, lastMs=45
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=20
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch true -> false at drive-start, cn=2, im=3
+[SUPER_AIR] wtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=2, im=3
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=20
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=10
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=10
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] wtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch true -> false at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch true -> false at drive-start, cn=0, im=19
+[SUPER_AIR] wtouch false -> true at drive-start, cn=6, im=0
+[SUPER_AIR] mtouch false -> true at drive-start, cn=0, im=19
+[SUPER_AIR] mtouch false -> true at drive-start, cn=6, im=0
