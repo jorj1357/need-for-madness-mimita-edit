@@ -4253,14 +4253,18 @@ public class GameSparker extends Applet implements Runnable {
                }
             }
 
-            if (var2 == 118 || var2 == 86) {
-               this.view++;
-               if (this.view == 3) {
-                  this.view = 0;
-               }
-            }
-         }
-      }
+             if (var2 == 118 || var2 == 86) {
+                this.view++;
+                if (this.view == 3) {
+                   this.view = 0;
+                }
+             }
+
+             if (var2 == 82 || var2 == 114) {
+                this.u[0].fixcar = true;
+             }
+          }
+       }
 
       return false;
    }
@@ -4301,10 +4305,14 @@ public class GameSparker extends Applet implements Runnable {
             }
          }
 
-         if (var2 == 120 || var2 == 88 || var2 == 122 || var2 == 90) {
-            this.u[0].lookback = 0;
-         }
-      }
+          if (var2 == 120 || var2 == 88 || var2 == 122 || var2 == 90) {
+             this.u[0].lookback = 0;
+          }
+
+          if (var2 == 82 || var2 == 114) {
+             this.u[0].fixcar = false;
+          }
+       }
 
       return false;
    }

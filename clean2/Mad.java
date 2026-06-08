@@ -352,6 +352,10 @@ public class Mad {
                   this.pushed = true;
                }
             } else if (this.gtouch) {
+               for (int var19 = 0; var19 < 4; var19++) {
+                  this.scy[var19] = -45.0F;
+               }
+               this.loop = 1;
                this.pushed = true;
             }
          }
@@ -2003,6 +2007,16 @@ public class Mad {
          if (this.fixes > 0) {
             this.fixes--;
          }
+      }
+
+      if (var1.fixcar) {
+         this.squash = 0;
+         this.nbsq = 0;
+         this.hitmag = 0;
+         this.cntdest = 0;
+         this.dest = false;
+         this.newcar = true;
+         var1.fixcar = false;
       }
 
       if (this.newedcar != 0) {

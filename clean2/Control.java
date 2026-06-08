@@ -78,8 +78,9 @@ public class Control {
    int frz = 0;
    int frad = 0;
    int apunch = 0;
-   boolean exitattack = false;
-   int avoidnlev = 0;
+    boolean exitattack = false;
+    int avoidnlev = 0;
+    boolean fixcar = false;
 
    public Control(Medium var1) {
       this.m = var1;
