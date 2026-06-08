@@ -2736,19 +2736,25 @@ public class Mad {
                      }
 
                      if (this.m.random() > this.m.random()) {
-                        var3.sprk(
-                           (var4[var15] + var7[var16]) / 2.0F,
-                           (var5[var15] + var8[var16]) / 2.0F,
-                           (var6[var15] + var9[var16]) / 2.0F,
-                           (var2.scx[var16] + this.scx[var15]) / 4.0F,
-                           (var2.scy[var16] + this.scy[var15]) / 4.0F,
-                           (var2.scz[var16] + this.scz[var15]) / 4.0F,
-                           2
-                        );
-                     }
-                  }
+                         var3.sprk(
+                            (var4[var15] + var7[var16]) / 2.0F,
+                            (var5[var15] + var8[var16]) / 2.0F,
+                            (var6[var15] + var9[var16]) / 2.0F,
+                            (var2.scx[var16] + this.scx[var15]) / 4.0F,
+                            (var2.scy[var16] + this.scy[var15]) / 4.0F,
+                            (var2.scz[var16] + this.scz[var15]) / 4.0F,
+                            2
+                         );
+                      }
 
-                  if (Math.abs(this.scz[var15] * this.cd.moment[this.cn]) > Math.abs(var2.scz[var16] * this.cd.moment[var2.cn])) {
+                      var3.spawnHitEffect(
+                         (var4[var15] + var7[var16]) / 2.0F,
+                         (var5[var15] + var8[var16]) / 2.0F,
+                         (var6[var15] + var9[var16]) / 2.0F
+                      );
+                   }
+
+                   if (Math.abs(this.scz[var15] * this.cd.moment[this.cn]) > Math.abs(var2.scz[var16] * this.cd.moment[var2.cn])) {
                      float var22 = var2.scz[var16] * this.cd.revpush[this.cn];
                      if (var22 > 300.0F) {
                         var22 = 300.0F;
@@ -2790,19 +2796,25 @@ public class Mad {
                      }
 
                      if (this.m.random() > this.m.random()) {
-                        var3.sprk(
-                           (var4[var15] + var7[var16]) / 2.0F,
-                           (var5[var15] + var8[var16]) / 2.0F,
-                           (var6[var15] + var9[var16]) / 2.0F,
-                           (var2.scx[var16] + this.scx[var15]) / 4.0F,
-                           (var2.scy[var16] + this.scy[var15]) / 4.0F,
-                           (var2.scz[var16] + this.scz[var15]) / 4.0F,
-                           2
-                        );
-                     }
-                  }
+                         var3.sprk(
+                            (var4[var15] + var7[var16]) / 2.0F,
+                            (var5[var15] + var8[var16]) / 2.0F,
+                            (var6[var15] + var9[var16]) / 2.0F,
+                            (var2.scx[var16] + this.scx[var15]) / 4.0F,
+                            (var2.scy[var16] + this.scy[var15]) / 4.0F,
+                            (var2.scz[var16] + this.scz[var15]) / 4.0F,
+                            2
+                         );
+                      }
 
-                  if (this.im == this.xt.im) {
+                      var3.spawnHitEffect(
+                         (var4[var15] + var7[var16]) / 2.0F,
+                         (var5[var15] + var8[var16]) / 2.0F,
+                         (var6[var15] + var9[var16]) / 2.0F
+                      );
+                   }
+
+                   if (this.im == this.xt.im) {
                      var2.lastcolido = 70;
                   }
 
@@ -2824,6 +2836,10 @@ public class Mad {
          if (this.im == this.xt.im && var11 != 0) {
             this.xt.dcrashes[var2.im] = this.xt.dcrashes[var2.im] + var11;
          }
+      }
+
+      if (this.im == this.xt.im && (var11 > 100 || var19 > 100)) {
+         this.xt.app.impactFrame = 10;
       }
    }
 

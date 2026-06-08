@@ -50,8 +50,9 @@ public class Medium {
    boolean bt = false;
    int vxz = 180;
    int adv = 500;
-   boolean vert = false;
-   float[] tcos = new float[360];
+    boolean vert = false;
+    boolean lockcam = false;
+    float[] tcos = new float[360];
    float[] tsin = new float[360];
    int lastmaf = 0;
    int checkpoint = -1;
@@ -540,9 +541,17 @@ public class Medium {
       this.zy = this.zy + (var11 - this.zy) / 10;
    }
 
-   public void follow(ContO var1, int var2, int var3) {
-      this.zy = 10;
-      int var4 = 2 + Math.abs(this.bcxz) / 4;
+    public void follow(ContO var1, int var2, int var3) {
+       if (this.lockcam) {
+          this.zy = 10;
+          this.bcxz = 0;
+          this.xz = -(var1.xz);
+          this.x = var1.x - this.cx + (int)(-(var1.z - 800 - var1.z) * this.sin(var1.xz));
+          this.z = var1.z - this.cz + (int)((var1.z - 800 - var1.z) * this.cos(var1.xz));
+          this.y = var1.y - 250 - this.cy;
+       } else {
+       this.zy = 10;
+       int var4 = 2 + Math.abs(this.bcxz) / 4;
       if (var4 > 20) {
          var4 = 20;
       }
@@ -581,10 +590,11 @@ public class Medium {
       this.xz = -var2;
       this.x = var1.x - this.cx + (int)(-(var1.z - 800 - var1.z) * this.sin(var2));
       this.z = var1.z - this.cz + (int)((var1.z - 800 - var1.z) * this.cos(var2));
-      this.y = var1.y - 250 - this.cy;
-   }
+       this.y = var1.y - 250 - this.cy;
+       }
+    }
 
-   public void getfollow(ContO var1, int var2, int var3) {
+    public void getfollow(ContO var1, int var2, int var3) {
       this.zy = 10;
       int var4 = 2 + Math.abs(this.bcxz) / 4;
       if (var4 > 20) {

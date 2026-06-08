@@ -30,8 +30,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class GameSparker extends Applet implements Runnable {
-   Graphics2D rd;
-   Image offImage;
+    Graphics2D rd;
+    Image offImage;
+    Image frontImage;
    Thread gamer;
    int mload = 1;
    boolean exwist = false;
@@ -67,11 +68,24 @@ public class GameSparker extends Applet implements Runnable {
    int view = 0;
    int mvect = 100;
    int lmxz = 0;
-   int shaka = 0;
-   long lastHighPlayerFrameAt = 0L;
+    int shaka = 0;
+    int impactFrame = 0;
+    long lastHighPlayerFrameAt = 0L;
    long highPlayerFrameTotal = 0L;
    int highPlayerFrameCount = 0;
-   boolean applejava = false;
+    boolean applejava = false;
+    boolean showDebug = false;
+    int fpsCount = 0;
+    int displayFps = 0;
+    long fpsTimer = 0L;
+    long lastFrameTime = 0L;
+    long frameTimeAccum = 0L;
+    int frameTimeSamples = 0;
+    long displayAvgFrameMs = 0L;
+    float displayTargetMs = 3.0F;
+    long physAccum = 0L;
+    long lastPhysTime = 0L;
+    static final long PHYS_TICK_MS = 33L;
    TextField tnick;
    TextField tpass;
    TextField temail;
@@ -154,7 +168,7 @@ public class GameSparker extends Applet implements Runnable {
          this.u[var15] = new Control(var1);
       }
 
-      float var40 = 47.0F;
+      float var40 = 3.0F;
       this.readcookies(var6, var5, var4);
       var6.testdrive = Madness.testdrive;
       if (var6.testdrive != 0) {
@@ -192,9 +206,9 @@ public class GameSparker extends Applet implements Runnable {
       Date var16 = new Date();
       long var17 = 0L;
       long var19 = var16.getTime();
-      float var21 = 30.0F;
+      float var21 = 3.0F;
       boolean var22 = false;
-      byte var23 = 30;
+      byte var23 = 0;
       short var24 = 530;
       int var25 = 0;
       int var26 = 0;
@@ -206,10 +220,16 @@ public class GameSparker extends Applet implements Runnable {
       int lastStage = Integer.MIN_VALUE;
       int autoFase = Integer.MIN_VALUE;
       int autoCount = 0;
+      this.lastPhysTime = System.currentTimeMillis();
+      this.physAccum = 0L;
 
       while (true) {
          var16 = new Date();
          long var31 = var16.getTime();
+         if (var6.fase != lastFase) {
+            this.physAccum = 0L;
+            this.lastPhysTime = var31;
+         }
          if (Madness.autotestMode != 0) {
             if (var6.fase != autoFase) {
                autoFase = var6.fase;
@@ -982,26 +1002,35 @@ public class GameSparker extends Applet implements Runnable {
             }
 
             if (var6.starcnt == 0) {
-               for (int var102 = 0; var102 < var6.nplayers; var102++) {
-                  for (int var124 = 0; var124 < var6.nplayers; var124++) {
-                     if (var124 != var102) {
-                        var14[var102].colide(var13[var102], var14[var124], var13[var124]);
+               long nowPhys = System.currentTimeMillis();
+               this.physAccum += nowPhys - this.lastPhysTime;
+               this.lastPhysTime = nowPhys;
+               if (this.physAccum >= PHYS_TICK_MS) {
+                  if (this.physAccum > PHYS_TICK_MS * 4) {
+                     this.physAccum = PHYS_TICK_MS;
+                  }
+                  this.physAccum -= PHYS_TICK_MS;
+                  for (int var102 = 0; var102 < var6.nplayers; var102++) {
+                     for (int var124 = 0; var124 < var6.nplayers; var124++) {
+                        if (var124 != var102) {
+                           var14[var102].colide(var13[var102], var14[var124], var13[var124]);
+                        }
                      }
                   }
-               }
 
-               for (int var103 = 0; var103 < var6.nplayers; var103++) {
-                  var14[var103].drive(this.u[var103], var13[var103], var2, var3);
-               }
+                  for (int var103 = 0; var103 < var6.nplayers; var103++) {
+                     var14[var103].drive(this.u[var103], var13[var103], var2, var3);
+                  }
 
-               for (int var104 = 0; var104 < var6.nplayers; var104++) {
-                  var12.rec(var13[var104], var104, var14[var104].squash, var14[var104].lastcolido, var14[var104].cntdest, 0);
-               }
+                  for (int var104 = 0; var104 < var6.nplayers; var104++) {
+                     var12.rec(var13[var104], var104, var14[var104].squash, var14[var104].lastcolido, var14[var104].cntdest, 0);
+                  }
 
-               var3.checkstat(var14, var13, var12, var6.nplayers, var6.im, 0);
+                  var3.checkstat(var14, var13, var12, var6.nplayers, var6.im, 0);
 
-               for (int var105 = 1; var105 < var6.nplayers; var105++) {
-                  this.u[var105].preform(var14[var105], var13[var105], var3, var2);
+                  for (int var105 = 1; var105 < var6.nplayers; var105++) {
+                     this.u[var105].preform(var14[var105], var13[var105], var3, var2);
+                  }
                }
             } else {
                if (var6.starcnt == 130) {
@@ -1018,8 +1047,9 @@ public class GameSparker extends Applet implements Runnable {
             }
 
             if (var6.starcnt < 38) {
-               if (this.view == 0) {
-                  var1.follow(var13[0], var14[0].cxz, this.u[0].lookback);
+                if (this.view == 0) {
+                   var1.lockcam = this.u[0].lockcam;
+                   var1.follow(var13[0], var14[0].cxz, this.u[0].lookback);
                   var6.stat(var14[0], var13[0], var3, this.u[0], true);
                   if (var14[0].outshakedam > 0) {
                      this.shaka = var14[0].outshakedam / 20;
@@ -1140,52 +1170,62 @@ public class GameSparker extends Applet implements Runnable {
                var13[var61[var86[var109]]].d(this.rd);
             }
 
-            if (var6.starcnt == 0) {
-               if (var6.multion == 1) {
-                  int var111 = 1;
+             if (var6.starcnt == 0) {
+                if (var6.multion == 1) {
+                   int var111 = 1;
 
-                  for (int var126 = 0; var126 < var6.nplayers; var126++) {
-                     if (var6.im != var126) {
-                        var11.readinfo(var14[var126], var13[var126], this.u[var111], var126, var3.dested);
-                        var111++;
-                     }
-                  }
-               } else {
-                  for (int var110 = 0; var110 < var6.nplayers; var110++) {
-                     var11.readinfo(var14[var110], var13[var110], this.u[var110], var110, var3.dested);
-                  }
-               }
+                   for (int var126 = 0; var126 < var6.nplayers; var126++) {
+                      if (var6.im != var126) {
+                         var11.readinfo(var14[var126], var13[var126], this.u[var111], var126, var3.dested);
+                         var111++;
+                      }
+                   }
+                } else {
+                   for (int var110 = 0; var110 < var6.nplayers; var110++) {
+                      var11.readinfo(var14[var110], var13[var110], this.u[var110], var110, var3.dested);
+                   }
+                }
 
-               for (int var112 = 0; var112 < var6.nplayers; var112++) {
-                  for (int var127 = 0; var127 < var6.nplayers; var127++) {
-                     if (var127 != var112) {
-                        var14[var112].colide(var13[var112], var14[var127], var13[var127]);
-                     }
-                  }
-               }
+                long nowPhys2 = System.currentTimeMillis();
+                this.physAccum += nowPhys2 - this.lastPhysTime;
+                this.lastPhysTime = nowPhys2;
+                if (this.physAccum >= PHYS_TICK_MS) {
+                   if (this.physAccum > PHYS_TICK_MS * 4) {
+                      this.physAccum = PHYS_TICK_MS;
+                   }
+                   this.physAccum -= PHYS_TICK_MS;
 
-               if (var6.multion != 1) {
-                  for (int var114 = 0; var114 < var6.nplayers; var114++) {
-                     var14[var114].drive(this.u[var114], var13[var114], var2, var3);
-                  }
-               } else {
-                  int var113 = 1;
+                   for (int var112 = 0; var112 < var6.nplayers; var112++) {
+                      for (int var127 = 0; var127 < var6.nplayers; var127++) {
+                         if (var127 != var112) {
+                            var14[var112].colide(var13[var112], var14[var127], var13[var127]);
+                         }
+                      }
+                   }
 
-                  for (int var128 = 0; var128 < var6.nplayers; var128++) {
-                     if (var6.im != var128) {
-                        var14[var128].drive(this.u[var113], var13[var128], var2, var3);
-                        var113++;
-                     } else {
-                        var14[var128].drive(this.u[0], var13[var128], var2, var3);
-                     }
-                  }
+                   if (var6.multion != 1) {
+                      for (int var114 = 0; var114 < var6.nplayers; var114++) {
+                         var14[var114].drive(this.u[var114], var13[var114], var2, var3);
+                      }
+                   } else {
+                      int var113 = 1;
 
-                  for (int var129 = 0; var129 < var6.nplayers; var129++) {
-                     var12.rec(var13[var129], var129, var14[var129].squash, var14[var129].lastcolido, var14[var129].cntdest, var6.im);
-                  }
-               }
+                      for (int var128 = 0; var128 < var6.nplayers; var128++) {
+                         if (var6.im != var128) {
+                            var14[var128].drive(this.u[var113], var13[var128], var2, var3);
+                            var113++;
+                         } else {
+                            var14[var128].drive(this.u[0], var13[var128], var2, var3);
+                         }
+                      }
 
-               var3.checkstat(var14, var13, var12, var6.nplayers, var6.im, var6.multion);
+                      for (int var129 = 0; var129 < var6.nplayers; var129++) {
+                         var12.rec(var13[var129], var129, var14[var129].squash, var14[var129].lastcolido, var14[var129].cntdest, var6.im);
+                      }
+                   }
+
+                   var3.checkstat(var14, var13, var12, var6.nplayers, var6.im, var6.multion);
+                }
             } else {
                if (var6.starcnt == 130) {
                   var1.adv = 1900;
@@ -1244,9 +1284,10 @@ public class GameSparker extends Applet implements Runnable {
             if (var6.starcnt < 38) {
                if (var6.multion == 1) {
                   var11.setinfo(var14[var6.im], var13[var6.im], this.u[0], var3.pos[var6.im], var3.magperc[var6.im], var6.holdit, var6.im);
-                  if (this.view == 0) {
-                     var1.follow(var13[var6.im], var14[var6.im].cxz, this.u[0].lookback);
-                     var6.stat(var14[var6.im], var13[var6.im], var3, this.u[0], true);
+                   if (this.view == 0) {
+                      var1.lockcam = this.u[0].lockcam;
+                      var1.follow(var13[var6.im], var14[var6.im].cxz, this.u[0].lookback);
+                      var6.stat(var14[var6.im], var13[var6.im], var3, this.u[0], true);
                      if (var14[var6.im].outshakedam > 0) {
                         this.shaka = var14[var6.im].outshakedam / 20;
                         if (this.shaka > 25) {
@@ -1822,7 +1863,51 @@ public class GameSparker extends Applet implements Runnable {
             }
          }
 
+          if (this.impactFrame > 0) {
+             this.impactFrame--;
+             this.rd.setComposite(AlphaComposite.getInstance(3, 0.7F));
+             this.rd.setColor(new Color(128, 128, 128));
+             this.rd.fillRect(0, 0, 800, 450);
+             this.rd.setComposite(AlphaComposite.getInstance(3, 1.0F));
+          }
+
+          if (this.showDebug) {
+             this.rd.setComposite(AlphaComposite.getInstance(3, 0.85F));
+             this.rd.setColor(new Color(0, 0, 0));
+             this.rd.fillRoundRect(8, 8, 280, 120, 8, 8);
+             this.rd.setComposite(AlphaComposite.getInstance(3, 1.0F));
+             this.rd.setFont(new Font("Consolas", 1, 13));
+             this.rd.setColor(new Color(0, 255, 100));
+             this.rd.drawString("FPS: " + this.displayFps, 18, 28);
+             this.rd.setColor(new Color(200, 200, 255));
+             this.rd.drawString("Frame Time: " + this.displayAvgFrameMs + " ms", 18, 48);
+             this.rd.drawString("Physics Tick: " + PHYS_TICK_MS + " ms", 18, 68);
+             this.rd.drawString("Phys Rate: " + (1000 / PHYS_TICK_MS) + " tps", 18, 88);
+             this.rd.drawString("Objects: " + this.nob, 18, 108);
+          }
+
+         long now = System.nanoTime();
+         if (this.lastFrameTime != 0L) {
+            long dt = now - this.lastFrameTime;
+            this.frameTimeAccum += dt;
+            this.frameTimeSamples++;
+         }
+         this.lastFrameTime = now;
+         this.fpsCount++;
+         if (now - this.fpsTimer >= 1000000000L) {
+            this.displayFps = this.fpsCount;
+            this.fpsCount = 0;
+            this.fpsTimer = now;
+            if (this.frameTimeSamples > 0) {
+               this.displayAvgFrameMs = this.frameTimeAccum / this.frameTimeSamples / 1000000L;
+            }
+            this.frameTimeAccum = 0L;
+            this.frameTimeSamples = 0;
+         }
+         this.displayTargetMs = var21;
+
          this.repaint();
+
          if (var6.im > -1 && var6.im < Madness.playerSlots()) {
             int var54 = 0;
             if (var6.multion == 2 || var6.multion == 3) {
@@ -1839,7 +1924,7 @@ public class GameSparker extends Applet implements Runnable {
          this.logHighPlayerFrameTiming(var6.nplayers, var6.fase, var55);
          if (var6.fase != 0 && var6.fase != -1 && var6.fase != -3 && var6.fase != 7001) {
             if (var22) {
-               var23 = 30;
+               var23 = 0;
                var40 = var21;
                var22 = false;
                var25 = 0;
@@ -1847,11 +1932,13 @@ public class GameSparker extends Applet implements Runnable {
 
             if (var25 == 10) {
                if (var55 - var19 < 400L) {
-                  var21 = (float)(var21 + 3.5);
+                  if (var21 < 3.0F) {
+                     var21 = 3.0F;
+                  }
                } else {
                   var21 = (float)(var21 - 3.5);
-                  if (var21 < 5.0F) {
-                     var21 = 5.0F;
+                  if (var21 < 3.0F) {
+                     var21 = 3.0F;
                   }
                }
 
@@ -1862,10 +1949,10 @@ public class GameSparker extends Applet implements Runnable {
             }
          } else {
             if (!var22) {
-               var23 = 15;
+               var23 = 0;
                var21 = var40;
-               if (var21 < 30.0F) {
-                  var21 = 30.0F;
+               if (var21 < 3.0F) {
+                  var21 = 3.0F;
                }
 
                var22 = true;
@@ -1882,9 +1969,8 @@ public class GameSparker extends Applet implements Runnable {
                   var78 = -40.0F;
                }
 
-               var21 += var78;
-               if (var21 < 5.0F) {
-                  var21 = 5.0F;
+               if (var21 < 3.0F) {
+                  var21 = 3.0F;
                }
 
                var1.adjstfade(var21, var78, var6.starcnt, this);
@@ -2105,7 +2191,8 @@ public class GameSparker extends Applet implements Runnable {
       } else {
          var2.drawImage(this.offImage, this.apx, this.apy, this);
       }
-   }
+
+    }
 
    public void cropit(Graphics2D var1, int var2, int var3) {
       if (var2 != 0 || var3 != 0) {
@@ -2138,10 +2225,11 @@ public class GameSparker extends Applet implements Runnable {
    @Override
    public void init() {
       this.setBackground(new Color(0, 0, 0));
-      this.offImage = this.createImage(800, 450);
-      if (this.offImage != null) {
-         this.rd = (Graphics2D)this.offImage.getGraphics();
-      }
+       this.offImage = this.createImage(800, 450);
+       this.frontImage = this.createImage(800, 450);
+       if (this.offImage != null) {
+          this.rd = (Graphics2D)this.offImage.getGraphics();
+       }
 
       this.rd.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
       this.rd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -4263,6 +4351,14 @@ public class GameSparker extends Applet implements Runnable {
              if (var2 == 82 || var2 == 114) {
                 this.u[0].fixcar = true;
              }
+
+              if (var2 == 71 || var2 == 103) {
+                 this.u[0].lockcam = true;
+              }
+
+              if (var2 == 80 || var2 == 112) {
+                 this.showDebug = !this.showDebug;
+              }
           }
        }
 
@@ -4311,6 +4407,10 @@ public class GameSparker extends Applet implements Runnable {
 
           if (var2 == 82 || var2 == 114) {
              this.u[0].fixcar = false;
+          }
+
+          if (var2 == 71 || var2 == 103) {
+             this.u[0].lockcam = false;
           }
        }
 

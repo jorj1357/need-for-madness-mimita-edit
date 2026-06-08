@@ -83,8 +83,14 @@ public class ContO {
    int colok = 0;
    boolean errd = false;
    String err = "";
-   int roofat = 0;
-   int wh = 0;
+    int roofat = 0;
+    int wh = 0;
+    static final int MAX_HIT_EFFECTS = 10;
+    float[] hitFx = new float[MAX_HIT_EFFECTS];
+    float[] hitFy = new float[MAX_HIT_EFFECTS];
+    float[] hitFz = new float[MAX_HIT_EFFECTS];
+    int[] hitLife = new int[MAX_HIT_EFFECTS];
+    int hitEffectCount = 0;
 
    public ContO(byte[] var1, Medium var2, Trackers var3) {
       this.m = var2;
@@ -1569,7 +1575,8 @@ public class ContO {
                   }
                }
 
-               this.dsprk(var1, false);
+                this.dsprk(var1, false);
+                this.drawHitEffect(var1);
             }
 
             this.dist = (int)(
@@ -2564,7 +2571,50 @@ public class ContO {
       }
    }
 
-   public int xs(int var1, int var2) {
+    public void spawnHitEffect(float wx, float wy, float wz) {
+       for (int i = 0; i < MAX_HIT_EFFECTS; i++) {
+          if (this.hitLife[i] == 0) {
+             this.hitFx[i] = wx;
+             this.hitFy[i] = wy;
+             this.hitFz[i] = wz;
+             this.hitLife[i] = 60;
+             return;
+          }
+       }
+    }
+
+    public void drawHitEffect(Graphics2D var1) {
+       for (int i = 0; i < MAX_HIT_EFFECTS; i++) {
+          if (this.hitLife[i] > 0) {
+             int sx = this.m.cx
+                + (int)((this.hitFx[i] - this.m.x - this.m.cx) * this.m.cos(this.m.xz)
+                   - (this.hitFz[i] - this.m.z - this.m.cz) * this.m.sin(this.m.xz));
+             int sz = this.m.cz
+                + (int)((this.hitFx[i] - this.m.x - this.m.cx) * this.m.sin(this.m.xz)
+                   + (this.hitFz[i] - this.m.z - this.m.cz) * this.m.cos(this.m.xz));
+             int sy = this.m.cy + (int)((this.hitFy[i] - this.m.y - this.m.cy) * this.m.cos(this.m.zy) - (sz - this.m.cz) * this.m.sin(this.m.zy));
+             sz = this.m.cz + (int)((this.hitFy[i] - this.m.y - this.m.cy) * this.m.sin(this.m.zy) + (sz - this.m.cz) * this.m.cos(this.m.zy));
+             int screenX = this.xs(sx, sz);
+             int screenY = this.ys(sy, sz);
+             int radius = (int)(300.0F / (sz / 100.0F + 1.0F));
+             if (radius < 2) {
+                radius = 2;
+             }
+             float alpha = this.hitLife[i] / 60.0F;
+             int r = (int)(255 * alpha);
+             int g = (int)(50 * alpha);
+             int b = (int)(50 * alpha);
+             if (r > 255) r = 255;
+             if (g > 255) g = 255;
+             if (b > 255) b = 255;
+             var1.setColor(new Color(r, g, b, (int)(alpha * 200)));
+             var1.fillOval(screenX - radius, screenY - radius, radius * 2, radius * 2);
+             this.hitLife[i]--;
+          }
+       }
+    }
+
+    public int xs(int var1, int var2) {
       if (var2 < 50) {
          var2 = 50;
       }
