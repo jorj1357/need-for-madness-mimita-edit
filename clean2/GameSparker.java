@@ -69,8 +69,8 @@ public class GameSparker extends Applet implements Runnable {
    int mvect = 100;
    int lmxz = 0;
     int shaka = 0;
-    int impactFrame = 0;
-    long lastHighPlayerFrameAt = 0L;
+     long impactFreezeUntil = 0L;
+     long lastHighPlayerFrameAt = 0L;
    long highPlayerFrameTotal = 0L;
    int highPlayerFrameCount = 0;
     boolean applejava = false;
@@ -952,9 +952,24 @@ public class GameSparker extends Applet implements Runnable {
             var6.fase = 22;
          }
 
-         if (var6.fase == 0) {
-            for (int var46 = 0; var46 < var6.nplayers; var46++) {
-               if (var14[var46].newcar) {
+          if (var6.fase == 0) {
+             if (this.u[0].reviveAll) {
+                this.u[0].reviveAll = false;
+                for (int var45 = 0; var45 < var6.nplayers; var45++) {
+                   var14[var45].dest = false;
+                   var14[var45].cntdest = 0;
+                   var14[var45].hitmag = 0;
+                   var14[var45].squash = 0;
+                   var14[var45].nbsq = 0;
+                   var14[var45].newcar = true;
+                   var12.dest[var45] = -1;
+                   var12.cntdest[var45] = 0;
+                   var3.dested[var45] = 0;
+                }
+             }
+
+             for (int var46 = 0; var46 < var6.nplayers; var46++) {
+                if (var14[var46].newcar) {
                   int var58 = var13[var46].xz;
                   int var68 = var13[var46].xy;
                   int var83 = var13[var46].zy;
@@ -1001,8 +1016,10 @@ public class GameSparker extends Applet implements Runnable {
                var13[var59[var84[var101]]].d(this.rd);
             }
 
-            if (var6.starcnt == 0) {
-               long nowPhys = System.currentTimeMillis();
+             if (System.currentTimeMillis() < this.impactFreezeUntil) {
+                // freeze - skip game logic
+             } else if (var6.starcnt == 0) {
+                long nowPhys = System.currentTimeMillis();
                this.physAccum += nowPhys - this.lastPhysTime;
                this.lastPhysTime = nowPhys;
                if (this.physAccum >= PHYS_TICK_MS) {
@@ -1041,12 +1058,55 @@ public class GameSparker extends Applet implements Runnable {
                   this.rd.fillRect(0, 0, 800, 450);
                }
 
-               if (var6.starcnt != 0) {
-                  var6.starcnt--;
-               }
-            }
+                if (var6.starcnt != 0) {
+                   var6.starcnt--;
+                }
+             }
 
-            if (var6.starcnt < 38) {
+             if (this.u[0].spawnBall && this.nob < var13.length) {
+                this.u[0].spawnBall = false;
+                int ballDir = var13[0].xz;
+                int ballX = var13[0].x + (int)(-var1.sin(ballDir) * 4000);
+                int ballZ = var13[0].z + (int)(var1.cos(ballDir) * 4000);
+                int ballY = var13[0].y + 50;
+                var13[this.nob] = new ContO(var4[var14[0].cn], ballX, ballY, ballZ, 0);
+                var13[this.nob].xz = ballDir;
+                var13[this.nob].dx = (int)(-var1.sin(ballDir) * 3.0F);
+                var13[this.nob].dz = (int)(var1.cos(ballDir) * 3.0F);
+                var13[this.nob].lifetime = 1800;
+                var13[this.nob].isProjectile = true;
+                this.nob++;
+             }
+
+             for (int varBallP = var6.nplayers; varBallP < this.nob; varBallP++) {
+                if (var13[varBallP].isProjectile && var13[varBallP].lifetime > 0) {
+                   var13[varBallP].x += var13[varBallP].dx;
+                   var13[varBallP].z += var13[varBallP].dz;
+                   var13[varBallP].lifetime--;
+                }
+             }
+
+             for (int varBallC = var6.nplayers; varBallC < this.nob; varBallC++) {
+                if (var13[varBallC].isProjectile && var13[varBallC].lifetime > 0) {
+                   for (int varBallCar = 0; varBallCar < var6.nplayers; varBallCar++) {
+                      int dxx = var13[varBallC].x - var13[varBallCar].x;
+                      int dzz = var13[varBallC].z - var13[varBallCar].z;
+                      int dyy = var13[varBallC].y - var13[varBallCar].y;
+                      if (dxx * dxx + dyy * dyy + dzz * dzz < (var13[varBallC].maxR + var13[varBallCar].maxR) * (var13[varBallC].maxR + var13[varBallCar].maxR)) {
+                         var14[varBallCar].hitmag = var14[varBallCar].cd.maxmag[var14[varBallCar].cn];
+                      }
+                   }
+                }
+             }
+
+             for (int varBallR = this.nob - 1; varBallR >= var6.nplayers; varBallR--) {
+                if (var13[varBallR].isProjectile && var13[varBallR].lifetime <= 0) {
+                   var13[varBallR] = var13[this.nob - 1];
+                   this.nob--;
+                }
+             }
+
+             if (var6.starcnt < 38) {
                 if (this.view == 0) {
                    var1.lockcam = this.u[0].lockcam;
                    var1.follow(var13[0], var14[0].cxz, this.u[0].lookback);
@@ -1863,13 +1923,12 @@ public class GameSparker extends Applet implements Runnable {
             }
          }
 
-          if (this.impactFrame > 0) {
-             this.impactFrame--;
-             this.rd.setComposite(AlphaComposite.getInstance(3, 0.7F));
-             this.rd.setColor(new Color(128, 128, 128));
-             this.rd.fillRect(0, 0, 800, 450);
-             this.rd.setComposite(AlphaComposite.getInstance(3, 1.0F));
-          }
+           if (System.currentTimeMillis() < this.impactFreezeUntil) {
+              this.rd.setComposite(AlphaComposite.getInstance(3, 0.7F));
+              this.rd.setColor(new Color(128, 128, 128));
+              this.rd.fillRect(0, 0, 800, 450);
+              this.rd.setComposite(AlphaComposite.getInstance(3, 1.0F));
+           }
 
           if (this.showDebug) {
              this.rd.setComposite(AlphaComposite.getInstance(3, 0.85F));
@@ -1905,6 +1964,14 @@ public class GameSparker extends Applet implements Runnable {
             this.frameTimeSamples = 0;
          }
          this.displayTargetMs = var21;
+
+         synchronized (this.frontImage) {
+            Graphics2D fg = (Graphics2D)this.frontImage.getGraphics();
+            if (fg != null) {
+               fg.drawImage(this.offImage, 0, 0, null);
+               fg.dispose();
+            }
+         }
 
          this.repaint();
 
@@ -2156,41 +2223,57 @@ public class GameSparker extends Applet implements Runnable {
             this.apy = 50;
          }
 
-         if (this.apmult > 1.0F) {
-            if (this.smooth == 1) {
-               var2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-               if (this.moto == 1) {
-                  var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
-                  this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
-                  var2.drawImage(this.offImage, this.apx + var3, this.apy + var4, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
-                  this.cropit(var2, var3, var4);
-               } else {
-                  var2.drawImage(this.offImage, this.apx, this.apy, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
-               }
-            } else if (this.moto == 1) {
-               var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
-               this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
-               var2.drawImage(this.offImage, this.apx + var3, this.apy + var4, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
-               this.cropit(var2, var3, var4);
-            } else {
-               var2.drawImage(this.offImage, this.apx, this.apy, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
-            }
-         } else if (this.moto == 1) {
-            var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
-            this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
-            var2.drawImage(this.offImage, this.apx + var3, this.apy + var4, this);
-            this.cropit(var2, var3, var4);
-         } else {
-            var2.drawImage(this.offImage, this.apx, this.apy, this);
-         }
-      } else if (this.moto == 1) {
-         var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
-         this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
-         var2.drawImage(this.offImage, this.apx + var3, this.apy + var4, this);
-         this.cropit(var2, var3, var4);
-      } else {
-         var2.drawImage(this.offImage, this.apx, this.apy, this);
-      }
+       if (this.apmult > 1.0F) {
+          if (this.smooth == 1) {
+             var2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+             if (this.moto == 1) {
+                var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
+                this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+                synchronized (this.frontImage) {
+                   var2.drawImage(this.frontImage, this.apx + var3, this.apy + var4, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
+                }
+                this.cropit(var2, var3, var4);
+             } else {
+                synchronized (this.frontImage) {
+                   var2.drawImage(this.frontImage, this.apx, this.apy, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
+                }
+             }
+          } else if (this.moto == 1) {
+             var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
+             this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+             synchronized (this.frontImage) {
+                var2.drawImage(this.frontImage, this.apx + var3, this.apy + var4, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
+             }
+             this.cropit(var2, var3, var4);
+          } else {
+             synchronized (this.frontImage) {
+                var2.drawImage(this.frontImage, this.apx, this.apy, (int)(800.0F * this.apmult), (int)(450.0F * this.apmult), this);
+             }
+          }
+       } else if (this.moto == 1) {
+          var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
+          this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+          synchronized (this.frontImage) {
+             var2.drawImage(this.frontImage, this.apx + var3, this.apy + var4, this);
+          }
+          this.cropit(var2, var3, var4);
+       } else {
+          synchronized (this.frontImage) {
+             var2.drawImage(this.frontImage, this.apx, this.apy, this);
+          }
+       }
+       } else if (this.moto == 1) {
+          var2.setComposite(AlphaComposite.getInstance(3, this.mvect / 100.0F));
+          this.rd.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+          synchronized (this.frontImage) {
+             var2.drawImage(this.frontImage, this.apx + var3, this.apy + var4, this);
+          }
+          this.cropit(var2, var3, var4);
+       } else {
+          synchronized (this.frontImage) {
+             var2.drawImage(this.frontImage, this.apx, this.apy, this);
+          }
+       }
 
     }
 
@@ -4356,11 +4439,19 @@ public class GameSparker extends Applet implements Runnable {
                  this.u[0].lockcam = true;
               }
 
-              if (var2 == 80 || var2 == 112) {
-                 this.showDebug = !this.showDebug;
-              }
-          }
-       }
+               if (var2 == 80 || var2 == 112) {
+                  this.showDebug = !this.showDebug;
+               }
+
+                if (var2 == 85 || var2 == 117) {
+                   this.u[0].reviveAll = true;
+                }
+
+                if (var2 == 74 || var2 == 106) {
+                   this.u[0].spawnBall = true;
+                }
+            }
+         }
 
       return false;
    }
@@ -4409,10 +4500,18 @@ public class GameSparker extends Applet implements Runnable {
              this.u[0].fixcar = false;
           }
 
-          if (var2 == 71 || var2 == 103) {
-             this.u[0].lockcam = false;
-          }
-       }
+           if (var2 == 71 || var2 == 103) {
+              this.u[0].lockcam = false;
+           }
+
+            if (var2 == 85 || var2 == 117) {
+               this.u[0].reviveAll = false;
+            }
+
+            if (var2 == 74 || var2 == 106) {
+               this.u[0].spawnBall = false;
+            }
+         }
 
       return false;
    }

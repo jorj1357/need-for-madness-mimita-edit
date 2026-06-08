@@ -71,8 +71,12 @@ public class ContO {
    float[] vry;
    float[] vrz;
    boolean elec = false;
-   boolean roted = false;
-   int[] edl = new int[4];
+    boolean roted = false;
+    int dx = 0;
+    int dz = 0;
+    int lifetime = 0;
+    boolean isProjectile = false;
+    int[] edl = new int[4];
    int[] edr = new int[4];
    int[] elc = new int[]{0, 0, 0, 0};
    boolean fix = false;

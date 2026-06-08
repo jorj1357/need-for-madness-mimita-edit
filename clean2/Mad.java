@@ -2839,7 +2839,7 @@ public class Mad {
       }
 
       if (this.im == this.xt.im && (var11 > 100 || var19 > 100)) {
-         this.xt.app.impactFrame = 10;
+         this.xt.app.impactFreezeUntil = System.currentTimeMillis() + 50L;
       }
    }
 

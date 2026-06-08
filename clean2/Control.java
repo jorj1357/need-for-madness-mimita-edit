@@ -82,6 +82,8 @@ public class Control {
     int avoidnlev = 0;
     boolean fixcar = false;
     boolean lockcam = false;
+    boolean reviveAll = false;
+    boolean spawnBall = false;
 
    public Control(Medium var1) {
       this.m = var1;
